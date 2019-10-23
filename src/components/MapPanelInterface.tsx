@@ -82,7 +82,8 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
             if(prevProps !== this.props) {
                 if(prevProps.controlPanel.startPoint !== this.props.controlPanel.startPoint ||
                     prevProps.controlPanel.endPoint !== this.props.controlPanel.endPoint) {
-                    let margin = 0.005;
+                    const lonPadding = 0.00583;
+                    const latPadding = 0.00311;
 
                     let pointStart = this.state.graph.getNode(this.props.controlPanel.startPoint);
                     let pointEnd = this.state.graph.getNode(this.props.controlPanel.endPoint);
@@ -93,20 +94,20 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                         let pointBLat: number;
                         let pointBLon: number;
 
-                        if (pointStart.data.lat > pointEnd.data.lat) {
-                            pointALat = pointStart.data.lat + margin;
-                            pointBLat = pointEnd.data.lat - margin;
+                        if (pointStart.data.lon > pointEnd.data.lon) {
+                            pointALon = pointStart.data.lon + lonPadding;
+                            pointBLon = pointEnd.data.lon - lonPadding;
                         } else {
-                            pointALat = pointStart.data.lat - margin;
-                            pointBLat = pointEnd.data.lat + margin;
+                            pointALon = pointStart.data.lon - lonPadding;
+                            pointBLon = pointEnd.data.lon + lonPadding;
                         }
 
-                        if (pointStart.data.lon > pointEnd.data.lon) {
-                            pointALon = pointStart.data.lon + margin;
-                            pointBLon = pointEnd.data.lon - margin;
+                        if (pointStart.data.lat > pointEnd.data.lat) {
+                            pointALat = pointStart.data.lat + latPadding;
+                            pointBLat = pointEnd.data.lat - latPadding;
                         } else {
-                            pointALon = pointStart.data.lon - margin;
-                            pointBLon = pointEnd.data.lon + margin;
+                            pointALat = pointStart.data.lat - latPadding;
+                            pointBLat = pointEnd.data.lat + latPadding;
                         }
 
                         let bounds = new LatLngBounds([pointALat, pointALon], [pointBLat, pointBLon]);
