@@ -1,0 +1,18 @@
+.control-panel-selector {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.control-panel-selector label, select {
+  display: block;
+}
+
+.map-panel {
+  text-align: center;
+}
+
+#map {
+  display: inline-block;
+  height: 800px;
+  width: 800px
+}
