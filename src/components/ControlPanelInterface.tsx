@@ -39,18 +39,8 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
             <div className='control-panel'>
                 <div className='control-panel-selector'>
                     <label>
-                        Start Point
-                    </label>
-                    <select value={this.props.startPoint} onChange={this.handleStartPointChange}>
-                        <option value='1788932701'>Дерево желаний</option>
-                        <option value='582469522'>Музей Васнецовых</option>
-                        <option value='135322595'>Филармония</option>
-                    </select>
-                </div>
-                <div className='control-panel-selector'>
-                    <label>
-                        End Point
-                        <select value={this.props.endPoint} onChange={this.handleEndPointChange}>
+                        Начало
+                        <select className='custom-select' value={this.props.startPoint} onChange={this.handleStartPointChange}>
                             <option value='1788932701'>Дерево желаний</option>
                             <option value='582469522'>Музей Васнецовых</option>
                             <option value='135322595'>Филармония</option>
@@ -59,8 +49,18 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
                 </div>
                 <div className='control-panel-selector'>
                     <label>
-                        Algorithm
-                        <select value={this.props.algorithm} onChange={this.handleAlgorithmChange}>
+                        Конец
+                        <select className='custom-select' value={this.props.endPoint} onChange={this.handleEndPointChange}>
+                            <option value='1788932701'>Дерево желаний</option>
+                            <option value='582469522'>Музей Васнецовых</option>
+                            <option value='135322595'>Филармония</option>
+                        </select>
+                    </label>
+                </div>
+                <div className='control-panel-selector'>
+                    <label>
+                        Алгоритм
+                        <select className='custom-select' value={this.props.algorithm} onChange={this.handleAlgorithmChange}>
                             <option value='aGreedy'>Greedy A</option>
                             <option value='aStar'>A Star</option>
                             <option value='nba'>NBA</option>

@@ -1,3 +1,7 @@
+.control-panel {
+  text-align: center;
+}
+
 .control-panel-selector {
   display: inline-block;
   margin-right: 10px;
@@ -7,12 +11,6 @@
   display: block;
 }
 
-.map-panel {
-  text-align: center;
-}
-
 #map {
-  display: inline-block;
-  height: 800px;
-  width: 800px
+  height: calc(100vh - 70px);
 }

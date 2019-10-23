@@ -1,5 +1,3 @@
-import update from 'immutability-helper';
-
 import { MapPanelState, MapPanelTypes, LOAD_ROAD_GRAPH } from "./types";
 
 const initialState: MapPanelState = {

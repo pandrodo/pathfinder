@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import createGraph, { Graph, Node }  from 'ngraph.graph';
+import createGraph, { Graph, Link, Node }  from 'ngraph.graph';
 import { aStar, aGreedy, nba, PathFinder } from 'ngraph.path'
 
-import L, {Layer} from 'leaflet';
+import L, { LatLngBounds, Layer, LayerGroup } from 'leaflet';
 import { Map, LatLngExpression } from "leaflet";
 
 import { AppState } from "../store";
@@ -18,6 +18,7 @@ interface MapPanelInterfaceProps {
 
 interface MapPanelInterfaceState {
     graph: Graph;
+    graphLayer: LayerGroup;
     map: Map;
     polyline: Layer;
 }
@@ -74,12 +75,75 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
         });
 
         this.setState({ graph: graph });
-
     };
 
     componentDidUpdate(prevProps: MapPanelInterfaceProps, prevState: MapPanelInterfaceState): void {
         if(this.props.controlPanel.startPoint && this.props.controlPanel.endPoint && this.props.controlPanel.algorithm) {
             if(prevProps !== this.props) {
+                if(prevProps.controlPanel.startPoint !== this.props.controlPanel.startPoint ||
+                    prevProps.controlPanel.endPoint !== this.props.controlPanel.endPoint) {
+                    let margin = 0.005;
+
+                    let pointStart = this.state.graph.getNode(this.props.controlPanel.startPoint);
+                    let pointEnd = this.state.graph.getNode(this.props.controlPanel.endPoint);
+
+                    if(pointStart && pointEnd) {
+                        let pointALat: number;
+                        let pointALon: number;
+                        let pointBLat: number;
+                        let pointBLon: number;
+
+                        if (pointStart.data.lat > pointEnd.data.lat) {
+                            pointALat = pointStart.data.lat + margin;
+                            pointBLat = pointEnd.data.lat - margin;
+                        } else {
+                            pointALat = pointStart.data.lat - margin;
+                            pointBLat = pointEnd.data.lat + margin;
+                        }
+
+                        if (pointStart.data.lon > pointEnd.data.lon) {
+                            pointALon = pointStart.data.lon + margin;
+                            pointBLon = pointEnd.data.lon - margin;
+                        } else {
+                            pointALon = pointStart.data.lon - margin;
+                            pointBLon = pointEnd.data.lon + margin;
+                        }
+
+                        let bounds = new LatLngBounds([pointALat, pointALon], [pointBLat, pointBLon]);
+
+                        if(this.state.graphLayer) {
+                            this.state.map.removeLayer(this.state.graphLayer);
+                        }
+
+                        let lines: any = [];
+
+                        this.state.graph.forEachNode((node: Node): boolean => {
+                            if(bounds.contains([node.data.lat, node.data.lon])) {
+                                node.links.forEach((link: Link): void => {
+                                    if(link.fromId === node.id) {
+                                        let toNode = this.state.graph.getNode(link.toId);
+                                        if(toNode) {
+                                            let line = L.polyline([[node.data.lat, node.data.lon], [toNode.data.lat, toNode.data.lon]], {
+                                                color: 'green'
+                                            });
+                                            lines.push(line);
+                                        }
+                                    }
+                                });
+                            }
+                            return false;
+                        });
+
+                        let graphLayer = L.layerGroup(lines)
+                            .addTo(this.state.map);
+
+                        if(prevState.graphLayer !== graphLayer) {
+                            this.setState({ graphLayer: graphLayer });
+                        }
+                    }
+
+                }
+
                 let pathfinder: PathFinder<NodeData>;
 
                 switch (this.props.controlPanel.algorithm) {
