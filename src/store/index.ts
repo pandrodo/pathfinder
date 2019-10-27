@@ -3,11 +3,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
 import { controlPanelReducer } from "./controlPanel/reducers";
-import { mapPanelReducer } from "./mapPanel/reducers";
 
 const rootReducer = combineReducers({
     controlPanel: controlPanelReducer,
-    mapPanel: mapPanelReducer,
+    // mapPanel: mapPanelReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>

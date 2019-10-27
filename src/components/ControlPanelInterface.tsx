@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { ControlPanelState } from "../store/controlPanel/types";
 import { setStartPoint, setEndPoint, setAlgorithm } from "../store/controlPanel/actions";
+import { AppState } from "../store";
 
 interface ControlPanelInterfaceProps {
     startPoint: string;
     endPoint: string;
     algorithm: string;
+    pathLength: string;
     setStartPoint: typeof setStartPoint;
     setEndPoint: typeof setEndPoint;
     setAlgorithm: typeof setAlgorithm;
@@ -44,6 +45,13 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
                             <option value='1788932701'>Дерево желаний</option>
                             <option value='582469522'>Музей Васнецовых</option>
                             <option value='135322595'>Филармония</option>
+                            <option value='2715644743'>Вокзал</option>
+                            <option value='265513434'>Факел</option>
+                            <option value='277945806'>Дружба</option>
+                            <option value='1832176667'>Кочуровский парк</option>
+                            <option value='4076342498'>Зональный институт</option>
+                            <option value='1787337924'>Диорама</option>
+                            <option value='265513353'>Парк Победы</option>
                         </select>
                     </label>
                 </div>
@@ -54,6 +62,13 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
                             <option value='1788932701'>Дерево желаний</option>
                             <option value='582469522'>Музей Васнецовых</option>
                             <option value='135322595'>Филармония</option>
+                            <option value='2715644743'>Вокзал</option>
+                            <option value='265513434'>Факел</option>
+                            <option value='277945806'>Дружба</option>
+                            <option value='1832176667'>Кочуровский парк</option>
+                            <option value='4076342498'>Зональный институт</option>
+                            <option value='1787337924'>Диорама</option>
+                            <option value='265513353'>Парк Победы</option>
                         </select>
                     </label>
                 </div>
@@ -63,7 +78,15 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
                         <select className='custom-select' value={this.props.algorithm} onChange={this.handleAlgorithmChange}>
                             <option value='aGreedy'>Greedy A</option>
                             <option value='aStar'>A Star</option>
-                            <option value='nba'>NBA</option>
+                            <option value='dijkstra'>Dijkstra</option>
+                        </select>
+                    </label>
+                </div>
+                <div className='control-panel-input'>
+                    <label>
+                        Расстояние
+                        <select className='custom-select' defaultValue='distance' disabled>
+                            <option value='distance'>{this.props.pathLength}</option>
                         </select>
                     </label>
                 </div>
@@ -72,10 +95,11 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
     }
 }
 
-const mapStateToProps = (state: ControlPanelState) => ({
-    startPoint: state.startPoint,
-    endPoint: state.endPoint,
-    algorithm: state.algorithm
+const mapStateToProps = (state: AppState) => ({
+    startPoint: state.controlPanel.startPoint,
+    endPoint: state.controlPanel.endPoint,
+    algorithm: state.controlPanel.algorithm,
+    pathLength: state.controlPanel.pathLength
 });
 
 export default connect(

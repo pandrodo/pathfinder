@@ -7,8 +7,22 @@
   margin-right: 10px;
 }
 
-.control-panel-selector label, select {
+.control-panel-input {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.control-panel-input label select, .control-panel-selector label select {
   display: block;
+}
+
+.control-panel-input select {
+  text-align-last: center;
+}
+
+.control-panel-input .custom-select {
+  width: 150px;
+  background: none !important;
 }
 
 #map {

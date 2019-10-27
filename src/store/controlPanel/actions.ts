@@ -1,4 +1,4 @@
-import {ControlPanelTypes, SET_ALGORITHM, SET_END_POINT, SET_START_POINT} from "./types";
+import {ControlPanelTypes, SET_ALGORITHM, SET_END_POINT, SET_PATH_LENGTH, SET_START_POINT} from "./types";
 
 export function setStartPoint(startPoint: string): ControlPanelTypes {
     return {
@@ -18,5 +18,12 @@ export function setAlgorithm(algorithm: string): ControlPanelTypes {
     return {
         type: SET_ALGORITHM,
         algorithm: algorithm
+    };
+}
+
+export function setPathLength(pathLength: string): ControlPanelTypes {
+    return {
+        type: SET_PATH_LENGTH,
+        pathLength: pathLength
     };
 }

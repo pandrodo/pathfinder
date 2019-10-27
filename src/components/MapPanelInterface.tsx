@@ -2,18 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import createGraph, { Graph, Link, Node }  from 'ngraph.graph';
-import { aStar, aGreedy, nba, PathFinder } from 'ngraph.path'
+import { aStar, aGreedy,  PathFinder } from 'ngraph.path'
 
 import L, { LatLngBounds, Layer, LayerGroup } from 'leaflet';
 import { Map, LatLngExpression } from "leaflet";
 
 import { AppState } from "../store";
 import { ControlPanelState } from "../store/controlPanel/types";
+import { setPathLength } from "../store/controlPanel/actions";
 
 import kirovRoads from '../assets/kirov-roads.json';
 
 interface MapPanelInterfaceProps {
     controlPanel: ControlPanelState;
+    setPathLength: typeof setPathLength;
 }
 
 interface MapPanelInterfaceState {
@@ -54,6 +56,48 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
 
         L.marker([58.5940628, 49.6816840])
             .bindTooltip('Филармония', {
+                permanent: true
+            })
+            .addTo(map);
+
+        L.marker([58.5790467, 49.6510139])
+            .bindTooltip('Вокзал', {
+                permanent: true
+            })
+            .addTo(map);
+
+        L.marker([58.6340257, 49.6106759])
+            .bindTooltip('Факел', {
+                permanent: true
+            })
+            .addTo(map);
+
+        L.marker([58.5777135, 49.6258210])
+            .bindTooltip('Дружба', {
+                permanent: true
+            })
+            .addTo(map);
+
+        L.marker([58.5927652, 49.6042923])
+            .bindTooltip('Кочуровский парк', {
+                permanent: true
+            })
+            .addTo(map);
+
+        L.marker([58.5757165, 49.6847114])
+            .bindTooltip('Зональный институт', {
+                permanent: true
+            })
+            .addTo(map);
+
+        L.marker([58.5910530, 49.6529298])
+            .bindTooltip('Диорама', {
+                permanent: true
+            })
+            .addTo(map);
+
+        L.marker([58.6074791, 49.6133608])
+            .bindTooltip('Парк Победы', {
                 permanent: true
             })
             .addTo(map);
@@ -145,56 +189,72 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
 
                 }
 
-                let pathfinder: PathFinder<NodeData>;
+                if(prevProps.controlPanel.startPoint !== this.props.controlPanel.startPoint ||
+                    prevProps.controlPanel.endPoint !== this.props.controlPanel.endPoint ||
+                    prevProps.controlPanel.algorithm !== this.props.controlPanel.algorithm) {
 
-                switch (this.props.controlPanel.algorithm) {
-                    case 'aGreedy':
-                        pathfinder = aGreedy(this.state.graph, {distance: this.distance, heuristic: this.heuristic});
-                        break;
-                    case 'aStar':
-                        pathfinder = aStar(this.state.graph, {distance: this.distance, heuristic: this.heuristic});
-                        break;
-                    case 'nba':
-                        pathfinder = nba(this.state.graph, {distance: this.distance, heuristic: this.heuristic});
-                        break;
-                    default:
-                        return;
-                }
+                    let pathfinder: PathFinder<NodeData>;
 
-                if(this.state.polyline) {
-                    this.state.map.removeLayer(this.state.polyline);
-                }
+                    switch (this.props.controlPanel.algorithm) {
+                        case 'aGreedy':
+                            pathfinder = aGreedy(this.state.graph, {distance: this.distance, heuristic: this.distance});
+                            break;
+                        case 'aStar':
+                            pathfinder = aStar(this.state.graph, {distance: this.distance, heuristic: this.distance});
+                            break;
+                        case 'dijkstra':
+                            pathfinder = aStar(this.state.graph, {distance: this.distance, heuristic: this.dijkstraHeuristic});
+                            break;
+                        default:
+                            return;
+                    }
 
-                const result = pathfinder.find(this.props.controlPanel.startPoint, this.props.controlPanel.endPoint);
+                    if(this.state.polyline) {
+                        this.state.map.removeLayer(this.state.polyline);
+                    }
 
-                const path: LatLngExpression[] = result.map(element => {
-                    return [element.data.lat, element.data.lon]
-                });
+                    const result = pathfinder.find(this.props.controlPanel.startPoint, this.props.controlPanel.endPoint);
 
-                let polyline = L.polyline(path, {
-                    color: 'red'
-                })
-                    .addTo(this.state.map);
+                    const path: LatLngExpression[] = result.map(element => {
+                        return [element.data.lat, element.data.lon]
+                    });
 
-                if(prevState.polyline !== polyline) {
-                    this.setState({ polyline: polyline });
+                    let polyline = L.polyline(path, {
+                        color: 'red'
+                    })
+                        .addTo(this.state.map);
+
+                    if(prevState.polyline !== polyline) {
+                        this.setState({ polyline: polyline });
+                    }
+
+                    let pathLength = 0;
+                    for (let i = 1; i < result.length; ++i) {
+                        let length = this.distance(result[i], result[i-1]);
+                        pathLength += length;
+                    }
+                    this.props.setPathLength(Math.round(pathLength).toString());
                 }
             }
         }
     }
 
     distance(fromNode: Node, toNode: Node) {
-        let dx = fromNode.data.lat - toNode.data.lat;
-        let dy = fromNode.data.lon - toNode.data.lon;
+        const earthRadius = 6378137;
 
-        return Math.sqrt(dx * dx + dy * dy);
+        const fromNodeLatInRadians = fromNode.data.lat * Math.PI / 180;
+        const fromNodeLonInRadians = fromNode.data.lon * Math.PI / 180;
+        const toNodeLatInRadians = toNode.data.lat * Math.PI / 180;
+        const toNodeLonInRadians = toNode.data.lon * Math.PI / 180;
+
+        const haversineLat = Math.pow(Math.sin((toNodeLatInRadians - fromNodeLatInRadians)/2), 2);
+        const haversineLon = Math.pow(Math.sin((toNodeLonInRadians - fromNodeLonInRadians)/2), 2);
+
+        return 2 * earthRadius * Math.asin(Math.sqrt(haversineLat + Math.cos(fromNodeLatInRadians) * Math.cos(toNodeLatInRadians) * haversineLon));
     }
 
-    heuristic(fromNode: Node, toNode: Node) {
-        let dx = fromNode.data.lat - toNode.data.lat;
-        let dy = fromNode.data.lon - toNode.data.lon;
-
-        return Math.sqrt(dx * dx + dy * dy);
+    dijkstraHeuristic(fromNode: Node, toNode: Node) {
+        return 0;
     }
 
     render() {
@@ -212,5 +272,6 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    { setPathLength }
 )(MapPanelInterface);

@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72ed801f-6b12-4718-91bb-d3052c53f091" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/adela.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/adela.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ControlPanelInterface.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ControlPanelInterface.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MapPanelInterface.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MapPanelInterface.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/controlPanel/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/controlPanel/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/controlPanel/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/controlPanel/reducers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/controlPanel/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/controlPanel/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +105,8 @@
       <option name="presentableId" value="Default" />
       <updated>1571130403529</updated>
       <workItem from="1571130407699" duration="25712000" />
-      <workItem from="1571583518874" duration="61737000" />
+      <workItem from="1571583518874" duration="64290000" />
+      <workItem from="1571925978246" duration="21390000" />
     </task>
     <servers />
   </component>
