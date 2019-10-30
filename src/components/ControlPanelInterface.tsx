@@ -18,6 +18,7 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
     constructor(props: ControlPanelInterfaceProps) {
         super(props);
 
+        //привязка изменений селекторов выбора начала/конца пути и алгоритма к actions redux store
         this.handleStartPointChange = this.handleStartPointChange.bind(this);
         this.handleEndPointChange = this.handleEndPointChange.bind(this);
         this.handleAlgorithmChange = this.handleAlgorithmChange.bind(this);

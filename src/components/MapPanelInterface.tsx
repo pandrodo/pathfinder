@@ -31,6 +31,7 @@ interface NodeData {
 }
 
 class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanelInterfaceState> {
+    //componentDidMount вызывается один раз при инициализации компонента
     componentDidMount(): void {
         let map = L.map('map', {
             center: [58.6026, 49.66664],
@@ -121,9 +122,13 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
         this.setState({ graph: graph });
     };
 
+    //componentDidUpdate вызывается при каждом изменении props/state компонента
     componentDidUpdate(prevProps: MapPanelInterfaceProps, prevState: MapPanelInterfaceState): void {
+        //проверка на наличие данных в props, которые в свою очередь привязаны к state в redux store
         if(this.props.controlPanel.startPoint && this.props.controlPanel.endPoint && this.props.controlPanel.algorithm) {
+            //проверка на то, что изменились именно props компонента, а не state
             if(prevProps !== this.props) {
+                //расчет границ области, в которой необходимо отобразить граф
                 if(prevProps.controlPanel.startPoint !== this.props.controlPanel.startPoint ||
                     prevProps.controlPanel.endPoint !== this.props.controlPanel.endPoint) {
                     const lonPadding = 0.00583;
@@ -189,6 +194,7 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
 
                 }
 
+                //расчет непосредственно маршрута
                 if(prevProps.controlPanel.startPoint !== this.props.controlPanel.startPoint ||
                     prevProps.controlPanel.endPoint !== this.props.controlPanel.endPoint ||
                     prevProps.controlPanel.algorithm !== this.props.controlPanel.algorithm) {
@@ -228,6 +234,7 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                         this.setState({ polyline: polyline });
                     }
 
+                    //расчет длины пути для отображения в controlPanel
                     let pathLength = 0;
                     for (let i = 1; i < result.length; ++i) {
                         let length = this.distance(result[i], result[i-1]);
