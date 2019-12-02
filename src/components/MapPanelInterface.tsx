@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import createGraph, {Graph, Link, Node, NodeId} from 'ngraph.graph';
 
+import aStarPathSearch from "../lib/a-star";
+import aGreedy from "../lib/a-greedy-star";
+
 import L, { LatLngBounds, Layer, LayerGroup } from 'leaflet';
 import { Map, LatLngExpression } from "leaflet";
 
@@ -32,9 +35,6 @@ interface NodeData {
 interface PathFinder<NodeData> {
     find: (from: NodeId, to: NodeId) => Node<NodeData>[]
 }
-
-const aStar = require('../lib/a-star');
-const aGreedy = require('../lib/a-greedy-star');
 
 class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanelInterfaceState> {
     //componentDidMount вызывается один раз при инициализации компонента
@@ -178,7 +178,7 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                             if(bounds.contains([node.data.lat, node.data.lon])) {
                                 node.links.forEach((link: Link): void => {
                                     if(link.fromId === node.id) {
-                                        //рисуем только те ребра (link), которые ведут К ноду
+                                        //рисуем только те ребра (link), которые ведут к ноду
                                         let toNode = this.state.graph.getNode(link.toId);
                                         if(toNode) {
                                             let line = L.polyline([[node.data.lat, node.data.lon], [toNode.data.lat, toNode.data.lon]], {
@@ -214,10 +214,10 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                             pathfinder = aGreedy(this.state.graph, {distance: this.distance, heuristic: this.distance});
                             break;
                         case 'aStar':
-                            pathfinder = aStar(this.state.graph, {distance: this.distance, heuristic: this.distance});
+                            pathfinder = aStarPathSearch(this.state.graph, {distance: this.distance, heuristic: this.distance});
                             break;
                         case 'dijkstra':
-                            pathfinder = aStar(this.state.graph, {distance: this.distance, heuristic: this.dijkstraHeuristic});
+                            pathfinder = aStarPathSearch(this.state.graph, {distance: this.distance, heuristic: this.dijkstraHeuristic});
                             break;
                         default:
                             return;

@@ -2,16 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72ed801f-6b12-4718-91bb-d3052c53f091" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/NodeHeap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/a-greedy-star.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/a-star.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/defaultSettings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/heuristics.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/makeSearchStatePool.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/NodeHeap.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/a-greedy-star.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/a-star.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/defaultSettings.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/heuristics.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/makeSearchStatePool.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/adela.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/adela.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MapPanelInterface.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MapPanelInterface.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/NodeHeap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/a-greedy-star.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/a-star.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/defaultSettings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/heuristics.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/makeSearchStatePool.js" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +34,11 @@
   </component>
   <component name="ProjectId" id="1SEYpI3VIQz5TRcPVSvRZJmsV2H" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -51,18 +62,6 @@
       <recent name="D:\Work\WebstormProjects\pathfinder\src\lib" />
       <recent name="D:\Work\WebstormProjects\pathfinder\src\assets" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
@@ -94,6 +93,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -107,7 +118,13 @@
       <workItem from="1571130407699" duration="25712000" />
       <workItem from="1571583518874" duration="64290000" />
       <workItem from="1571925978246" duration="26032000" />
-      <workItem from="1572435254397" duration="13839000" />
+      <workItem from="1572435254397" duration="14833000" />
+      <workItem from="1573037120419" duration="609000" />
+      <workItem from="1573055837230" duration="3260000" />
+      <workItem from="1573214435466" duration="7045000" />
+      <workItem from="1574937724204" duration="8465000" />
+      <workItem from="1575275539561" duration="2944000" />
+      <workItem from="1575283488939" duration="5539000" />
     </task>
     <servers />
   </component>
@@ -126,5 +143,27 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="2539" height="261" key="GridCell.Tab.0.bottom" timestamp="1575289800163">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2539" height="261" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575289800163" />
+    <state width="2539" height="261" key="GridCell.Tab.0.center" timestamp="1575289800163">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2539" height="261" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575289800163" />
+    <state width="2539" height="261" key="GridCell.Tab.0.left" timestamp="1575289800163">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2539" height="261" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575289800163" />
+    <state width="2539" height="261" key="GridCell.Tab.0.right" timestamp="1575289800163">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2539" height="261" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575289800163" />
+    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup" timestamp="1575287317265">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575287317265" />
   </component>
 </project>
