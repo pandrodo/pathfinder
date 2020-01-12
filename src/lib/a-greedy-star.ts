@@ -83,7 +83,7 @@ function aGreedy(graph: Graph, options: PathfinderOptions) {
         });
 
         let startNode = pool.createNewState(from);
-        nodeState.set(fromId, startNode);
+        nodeState.set(Number(fromId), startNode);
 
         // For the first node, fScore is completely heuristic.
         startNode.fScore = heuristic(from, to);

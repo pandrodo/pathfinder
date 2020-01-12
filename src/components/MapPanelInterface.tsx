@@ -109,6 +109,58 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
             })
             .addTo(map);
 
+        L.Icon.Default.prototype.options.iconSize = [10, 25];
+        L.Icon.Default.prototype.options.iconAnchor = [5, 22];
+        L.Icon.Default.prototype.options.shadowSize = [0, 0];
+
+        L.marker([58.5964114, 49.6200889])
+            .bindTooltip('Т1', {
+                permanent: false,
+            })
+            .addTo(map);
+
+        L.marker([58.5965427, 49.6202311])
+            .bindTooltip('Т2', {
+                permanent: false
+            })
+            .addTo(map);
+
+        L.marker([58.5966308, 49.6201828])
+            .bindTooltip('Т3', {
+                permanent: false
+            })
+            .addTo(map);
+
+        L.marker([58.5966392, 49.6203598])
+            .bindTooltip('Т4', {
+                permanent: false
+            })
+            .addTo(map);
+
+        L.marker([58.5963974, 49.6210518])
+            .bindTooltip('Т5', {
+                permanent: false
+            })
+            .addTo(map);
+
+        L.marker([58.5962949, 49.6209325])
+            .bindTooltip('Т6', {
+                permanent: false
+            })
+            .addTo(map);
+
+        L.marker([58.5961360, 49.6207300])
+            .bindTooltip('Т7', {
+                permanent: false
+            })
+            .addTo(map);
+
+        L.marker([58.5967566, 49.6197563])
+            .bindTooltip('Т8', {
+                permanent: false
+            })
+            .addTo(map);
+
         this.setState({ map: map });
 
         let graph = createGraph();
@@ -124,6 +176,18 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                 }
             }
         });
+
+        // const nodes = [5998899980, 5998899981, 5998899975, 5998899976, 5998899977, 5998899978, 5998899979, 5998899974];
+        // let node1 = graph.getNode(nodes[0]);
+        // let node2 = graph.getNode(nodes[1]);
+        //
+        // if (node1 && node2) {
+        //     L.polyline([[node1.data.lat, node1.data.lon], [node2.data.lat, node2.data.lon]], {
+        //         color: 'blue'
+        //     }).bindTooltip('jopa', {
+        //         permanent: false
+        //     }).addTo(map);
+        // }
 
         this.setState({ graph: graph });
     };
@@ -181,8 +245,11 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                                         //рисуем только те ребра (link), которые ведут к ноду
                                         let toNode = this.state.graph.getNode(link.toId);
                                         if(toNode) {
+                                            let distance = Math.round(this.distance(node, toNode)).toString();
                                             let line = L.polyline([[node.data.lat, node.data.lon], [toNode.data.lat, toNode.data.lon]], {
                                                 color: 'green'
+                                            }).bindTooltip(distance, {
+                                                permanent:false
                                             });
                                             lines.push(line);
                                         }
@@ -234,13 +301,25 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                     });
 
                     let polyline = L.polyline(path, {
-                        color: 'red'
+                        color: 'red',
+                        interactive: false
                     })
                         .addTo(this.state.map);
+
 
                     if(prevState.polyline !== polyline) {
                         this.setState({ polyline: polyline });
                     }
+
+                    // result.forEach((element, index) => {
+                    //     if(result[index+1]){
+                    //         let distance = this.distance(result[index], result[index+1]).toString();
+                    //         L.polyline([[result[index].data.lat, result[index].data.lon], [result[index+1].data.lat, result[index+1].data.lon]], {
+                    //             color: 'red'
+                    //         }).bindTooltip(distance)
+                    //             .addTo(this.state.map);
+                    //     }
+                    // });
 
                     //расчет длины пути для отображения в controlPanel
                     let pathLength = 0;

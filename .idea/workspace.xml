@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="72ed801f-6b12-4718-91bb-d3052c53f091" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/heuristics.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ControlPanelInterface.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ControlPanelInterface.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MapPanelInterface.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MapPanelInterface.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/a-greedy-star.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/a-greedy-star.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/a-star.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/a-star.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +34,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../onslaught" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -37,17 +42,17 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="ts.external.directory.path" value="D:\Work\WebstormProjects\pathfinder\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Work\WebstormProjects\pathfinder\src\lib" />
-      <recent name="D:\Work\WebstormProjects\pathfinder\src\assets" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\WebstormProjects\pathfinder\src\tests" />
       <recent name="D:\Work\WebstormProjects\pathfinder\src\components" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\WebstormProjects\pathfinder\src\lib" />
+      <recent name="D:\Work\WebstormProjects\pathfinder\src\assets" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -112,7 +117,17 @@
       <workItem from="1574937724204" duration="8465000" />
       <workItem from="1575275539561" duration="2944000" />
       <workItem from="1575283488939" duration="6607000" />
-      <workItem from="1575295875740" duration="245000" />
+      <workItem from="1575295875740" duration="1336000" />
+      <workItem from="1575741815945" duration="256000" />
+      <workItem from="1575742102802" duration="141000" />
+      <workItem from="1575974004811" duration="1053000" />
+      <workItem from="1576588191349" duration="139000" />
+      <workItem from="1578239031642" duration="567000" />
+      <workItem from="1578573477048" duration="47000" />
+      <workItem from="1578573817895" duration="5705000" />
+      <workItem from="1578761343967" duration="78000" />
+      <workItem from="1578761462886" duration="2553000" />
+      <workItem from="1578829742990" duration="14198000" />
     </task>
     <servers />
   </component>
@@ -133,25 +148,37 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="2539" height="261" key="GridCell.Tab.0.bottom" timestamp="1575293166702">
+    <state x="1060" y="474" key="FileChooserDialogImpl" timestamp="1575742125358">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2539" height="261" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575293166702" />
-    <state width="2539" height="261" key="GridCell.Tab.0.center" timestamp="1575293166702">
+    <state x="1060" y="474" key="FileChooserDialogImpl/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575742125358" />
+    <state width="2539" height="429" key="GridCell.Tab.0.bottom" timestamp="1578765234386">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2539" height="261" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575293166702" />
-    <state width="2539" height="261" key="GridCell.Tab.0.left" timestamp="1575293166702">
+    <state width="2539" height="429" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1578765234386" />
+    <state width="2539" height="429" key="GridCell.Tab.0.center" timestamp="1578765234386">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2539" height="261" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575293166702" />
-    <state width="2539" height="261" key="GridCell.Tab.0.right" timestamp="1575293166702">
+    <state width="2539" height="429" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1578765234386" />
+    <state width="2539" height="429" key="GridCell.Tab.0.left" timestamp="1578765234385">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2539" height="261" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575293166702" />
-    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup" timestamp="1575287317265">
+    <state width="2539" height="429" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1578765234385" />
+    <state width="2539" height="429" key="GridCell.Tab.0.right" timestamp="1578765234386">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1575287317265" />
+    <state width="2539" height="429" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1578765234386" />
+    <state x="629" y="347" key="SettingsEditor" timestamp="1578239219463">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="629" y="347" key="SettingsEditor/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1578239219463" />
+    <state x="977" y="457" width="606" height="526" key="find.popup" timestamp="1576588266796">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="977" y="457" width="606" height="526" key="find.popup/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1576588266796" />
+    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup" timestamp="1578832581283">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="943" y="325" width="672" height="678" key="search.everywhere.popup/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1578832581283" />
   </component>
 </project>

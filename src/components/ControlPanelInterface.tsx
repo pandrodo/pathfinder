@@ -53,6 +53,14 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
                             <option value='4076342498'>Зональный институт</option>
                             <option value='1787337924'>Диорама</option>
                             <option value='265513353'>Парк Победы</option>
+                            <option value='5998899980'>Т1</option>
+                            <option value='5998899981'>Т2</option>
+                            <option value='5998899975'>Т3</option>
+                            <option value='5998899976'>Т4</option>
+                            <option value='5998899977'>Т5</option>
+                            <option value='5998899978'>Т6</option>
+                            <option value='5998899979'>Т7</option>
+                            <option value='5998899974'>Т8</option>
                         </select>
                     </label>
                 </div>
@@ -70,6 +78,14 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
                             <option value='4076342498'>Зональный институт</option>
                             <option value='1787337924'>Диорама</option>
                             <option value='265513353'>Парк Победы</option>
+                            <option value='5998899980'>Т1</option>
+                            <option value='5998899981'>Т2</option>
+                            <option value='5998899975'>Т3</option>
+                            <option value='5998899976'>Т4</option>
+                            <option value='5998899977'>Т5</option>
+                            <option value='5998899978'>Т6</option>
+                            <option value='5998899979'>Т7</option>
+                            <option value='5998899974'>Т8</option>
                         </select>
                     </label>
                 </div>
