@@ -2,13 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setStartPoint, setEndPoint, setAlgorithm } from "../store/controlPanel/actions";
+import { ControlPanelState } from "../store/controlPanel/types";
+import { UserPanelState } from "../store/users/types";
 import { AppState } from "../store";
 
+import LoginPanelInterface from "./LoginPanelInterface";
+import HomePanelInterface from "./HomePanelInterface";
+
 interface ControlPanelInterfaceProps {
-    startPoint: string;
-    endPoint: string;
-    algorithm: string;
-    pathLength: string;
+    controlPanel: ControlPanelState;
+    userPanel: UserPanelState;
     setStartPoint: typeof setStartPoint;
     setEndPoint: typeof setEndPoint;
     setAlgorithm: typeof setAlgorithm;
@@ -37,86 +40,58 @@ class ControlPanelInterface extends React.Component<ControlPanelInterfaceProps> 
     }
 
     render() {
+        let options: JSX.Element[] = this.props.userPanel.user.points.map((point) =>
+                <option key={point.nodeId} value={point.nodeId}>{point.name}</option>
+            );
+
         return (
-            <div className='control-panel'>
+            <div className='control-panel d-flex'>
+            <div className='pathfinder-interface'>
                 <div className='control-panel-selector'>
                     <label>
                         Начало
-                        <select className='custom-select' value={this.props.startPoint} onChange={this.handleStartPointChange}>
-                            <option value='1788932701'>Дерево желаний</option>
-                            <option value='582469522'>Музей Васнецовых</option>
-                            <option value='135322595'>Филармония</option>
-                            <option value='2715644743'>Вокзал</option>
-                            <option value='265513434'>Факел</option>
-                            <option value='277945806'>Дружба</option>
-                            <option value='1832176667'>Кочуровский парк</option>
-                            <option value='4076342498'>Зональный институт</option>
-                            <option value='1787337924'>Диорама</option>
-                            <option value='265513353'>Парк Победы</option>
-                            <option value='5998899980'>Т1</option>
-                            <option value='5998899981'>Т2</option>
-                            <option value='5998899975'>Т3</option>
-                            <option value='5998899976'>Т4</option>
-                            <option value='5998899977'>Т5</option>
-                            <option value='5998899978'>Т6</option>
-                            <option value='5998899979'>Т7</option>
-                            <option value='5998899974'>Т8</option>
+                        <select className='custom-select' value={this.props.controlPanel.startPoint} onChange={this.handleStartPointChange}>
+                            {options}
                         </select>
                     </label>
                 </div>
                 <div className='control-panel-selector'>
                     <label>
                         Конец
-                        <select className='custom-select' value={this.props.endPoint} onChange={this.handleEndPointChange}>
-                            <option value='1788932701'>Дерево желаний</option>
-                            <option value='582469522'>Музей Васнецовых</option>
-                            <option value='135322595'>Филармония</option>
-                            <option value='2715644743'>Вокзал</option>
-                            <option value='265513434'>Факел</option>
-                            <option value='277945806'>Дружба</option>
-                            <option value='1832176667'>Кочуровский парк</option>
-                            <option value='4076342498'>Зональный институт</option>
-                            <option value='1787337924'>Диорама</option>
-                            <option value='265513353'>Парк Победы</option>
-                            <option value='5998899980'>Т1</option>
-                            <option value='5998899981'>Т2</option>
-                            <option value='5998899975'>Т3</option>
-                            <option value='5998899976'>Т4</option>
-                            <option value='5998899977'>Т5</option>
-                            <option value='5998899978'>Т6</option>
-                            <option value='5998899979'>Т7</option>
-                            <option value='5998899974'>Т8</option>
+                        <select className='custom-select' value={this.props.controlPanel.endPoint} onChange={this.handleEndPointChange}>
+                            {options}
                         </select>
                     </label>
                 </div>
                 <div className='control-panel-selector'>
                     <label>
                         Алгоритм
-                        <select className='custom-select' value={this.props.algorithm} onChange={this.handleAlgorithmChange}>
+                        <select className='custom-select' value={this.props.controlPanel.algorithm} onChange={this.handleAlgorithmChange}>
                             <option value='aGreedy'>Greedy A</option>
                             <option value='aStar'>A Star</option>
                             <option value='dijkstra'>Dijkstra</option>
                         </select>
                     </label>
                 </div>
-                <div className='control-panel-input'>
-                    <label>
-                        Расстояние
-                        <select className='custom-select' defaultValue='distance' disabled>
-                            <option value='distance'>{this.props.pathLength}</option>
-                        </select>
-                    </label>
-                </div>
+                {/*<div className='control-panel-input'>*/}
+                {/*    <label>*/}
+                {/*        Расстояние*/}
+                {/*        <select className='custom-select' defaultValue='distance' disabled>*/}
+                {/*            <option value='distance'>{this.props.controlPanel.pathLength}</option>*/}
+                {/*        </select>*/}
+                {/*    </label>*/}
+                {/*</div>*/}
+        </div>
+                <LoginPanelInterface/>
+                <HomePanelInterface/>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state: AppState) => ({
-    startPoint: state.controlPanel.startPoint,
-    endPoint: state.controlPanel.endPoint,
-    algorithm: state.controlPanel.algorithm,
-    pathLength: state.controlPanel.pathLength
+    controlPanel: state.controlPanel,
+    userPanel: state.userPanel,
 });
 
 export default connect(

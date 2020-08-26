@@ -6,23 +6,34 @@ import createGraph, {Graph, Link, Node, NodeId} from 'ngraph.graph';
 import aStarPathSearch from "../lib/a-star";
 import aGreedy from "../lib/a-greedy-star";
 
-import L, { LatLngBounds, Layer, LayerGroup } from 'leaflet';
+import L, {LatLngBounds, Layer, LayerGroup, LeafletMouseEvent} from 'leaflet';
 import { Map, LatLngExpression } from "leaflet";
 
 import { AppState } from "../store";
 import { ControlPanelState } from "../store/controlPanel/types";
-import { setPathLength } from "../store/controlPanel/actions";
+import { setStartPoint, setEndPoint, setPathLength } from "../store/controlPanel/actions";
+import { alertClear } from "../store/alerts/actions";
+import { UserPanelState } from "../store/users/types";
+import { addNewPointEnd, addNewPoint, getPoints } from "../store/users/actions";
 
 import kirovRoads from '../assets/kirov-roads.json';
 
 interface MapPanelInterfaceProps {
     controlPanel: ControlPanelState;
+    userPanel: UserPanelState;
     setPathLength: typeof setPathLength;
+    setStartPoint: typeof setStartPoint;
+    setEndPoint: typeof setEndPoint;
+    alertClear: typeof alertClear;
+    addNewPointEnd: typeof addNewPointEnd;
+    addNewPoint: typeof addNewPoint;
+    getPoints: typeof getPoints;
 }
 
 interface MapPanelInterfaceState {
     graph: Graph;
     graphLayer: LayerGroup;
+    markerLayer: LayerGroup;
     map: Map;
     polyline: Layer;
 }
@@ -36,9 +47,58 @@ interface PathFinder<NodeData> {
     find: (from: NodeId, to: NodeId) => Node<NodeData>[]
 }
 
+interface Route {
+    start: string;
+    end: string;
+    algorithm: string;
+    data: LatLngExpression[];
+    pathLength: number;
+}
+
 class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanelInterfaceState> {
+    constructor(props: MapPanelInterfaceProps, state: MapPanelInterfaceState) {
+        super(props, state);
+
+        this.handleMapClick = this.handleMapClick.bind(this);
+    }
+
+    handleMapClick(e: LeafletMouseEvent) {
+        if(this.props.userPanel.addingNewPoint) {
+            this.props.addNewPointEnd();
+
+            let nearestNodeId: { id: string, distance: number } = { id: '', distance: 9999999999999 };
+            const newPoint: Node = { id: 'newPointId', links: [], data: { lat: e.latlng.lat, lon: e.latlng.lng} };
+
+            kirovRoads.elements.forEach(element => {
+                if (element.type === 'node') {
+                    let currentNode: Node = { id: element.id, links: [], data: { lat: element.lat, lon: element.lon }};
+                    let distance = this.distance(newPoint, currentNode);
+                    if (distance < nearestNodeId.distance) {
+                        nearestNodeId = { id: element.id, distance: distance };
+                    }
+                }
+            });
+
+            const name = prompt('Введите название для выбранной точки');
+            if (name) {
+                this.props.addNewPoint(this.props.userPanel.user.username, nearestNodeId.id, name);
+                this.props.getPoints(this.props.userPanel.user.username);
+                window.location.reload();
+            }
+
+            this.props.alertClear();
+        }
+    }
+
     //componentDidMount вызывается один раз при инициализации компонента
     componentDidMount(): void {
+        //Проверка наличия записи в localStorage
+        const storedRoutes = localStorage.getItem('routes');
+        if (!storedRoutes) {
+            const routes: Route[] = [];
+            localStorage.setItem('routes', JSON.stringify(routes));
+        }
+
         let map = L.map('map', {
             center: [58.6026, 49.66664],
             zoom: 16,
@@ -46,120 +106,10 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 }),
-            ]
+            ],
         });
 
-        L.marker([58.6052333, 49.6666882])
-            .bindTooltip('Дерево желаний', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.6018713, 49.6681091])
-            .bindTooltip('Музей Васнецовых', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.5940628, 49.6816840])
-            .bindTooltip('Филармония', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.5790467, 49.6510139])
-            .bindTooltip('Вокзал', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.6340257, 49.6106759])
-            .bindTooltip('Факел', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.5777135, 49.6258210])
-            .bindTooltip('Дружба', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.5927652, 49.6042923])
-            .bindTooltip('Кочуровский парк', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.5757165, 49.6847114])
-            .bindTooltip('Зональный институт', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.5910530, 49.6529298])
-            .bindTooltip('Диорама', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.marker([58.6074791, 49.6133608])
-            .bindTooltip('Парк Победы', {
-                permanent: true
-            })
-            .addTo(map);
-
-        L.Icon.Default.prototype.options.iconSize = [10, 25];
-        L.Icon.Default.prototype.options.iconAnchor = [5, 22];
-        L.Icon.Default.prototype.options.shadowSize = [0, 0];
-
-        L.marker([58.5964114, 49.6200889])
-            .bindTooltip('Т1', {
-                permanent: false,
-            })
-            .addTo(map);
-
-        L.marker([58.5965427, 49.6202311])
-            .bindTooltip('Т2', {
-                permanent: false
-            })
-            .addTo(map);
-
-        L.marker([58.5966308, 49.6201828])
-            .bindTooltip('Т3', {
-                permanent: false
-            })
-            .addTo(map);
-
-        L.marker([58.5966392, 49.6203598])
-            .bindTooltip('Т4', {
-                permanent: false
-            })
-            .addTo(map);
-
-        L.marker([58.5963974, 49.6210518])
-            .bindTooltip('Т5', {
-                permanent: false
-            })
-            .addTo(map);
-
-        L.marker([58.5962949, 49.6209325])
-            .bindTooltip('Т6', {
-                permanent: false
-            })
-            .addTo(map);
-
-        L.marker([58.5961360, 49.6207300])
-            .bindTooltip('Т7', {
-                permanent: false
-            })
-            .addTo(map);
-
-        L.marker([58.5967566, 49.6197563])
-            .bindTooltip('Т8', {
-                permanent: false
-            })
-            .addTo(map);
+        map.on('click', this.handleMapClick);
 
         this.setState({ map: map });
 
@@ -177,23 +127,58 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
             }
         });
 
-        // const nodes = [5998899980, 5998899981, 5998899975, 5998899976, 5998899977, 5998899978, 5998899979, 5998899974];
-        // let node1 = graph.getNode(nodes[0]);
-        // let node2 = graph.getNode(nodes[1]);
-        //
-        // if (node1 && node2) {
-        //     L.polyline([[node1.data.lat, node1.data.lon], [node2.data.lat, node2.data.lon]], {
-        //         color: 'blue'
-        //     }).bindTooltip('jopa', {
-        //         permanent: false
-        //     }).addTo(map);
-        // }
+        let markerLayer = L.layerGroup().addTo(map);
+
+        this.props.userPanel.user.points.forEach(point => {
+            const node = graph.getNode(point.nodeId);
+            if (node) {
+                L.marker([node.data.lat, node.data.lon])
+                    .bindTooltip(point.name, {
+                        permanent: false
+                    })
+                    .addTo(markerLayer);
+            }
+        });
+
+        this.setState({ markerLayer: markerLayer });
 
         this.setState({ graph: graph });
     };
 
     //componentDidUpdate вызывается при каждом изменении props/state компонента
     componentDidUpdate(prevProps: MapPanelInterfaceProps, prevState: MapPanelInterfaceState): void {
+        //Проверка наличия записи в localStorage
+        const storedRoutes = localStorage.getItem('routes');
+        if (!storedRoutes) {
+            const routes: Route[] = [];
+            localStorage.setItem('routes', JSON.stringify(routes));
+        }
+
+        if(JSON.stringify(prevProps.userPanel.user.points) !== JSON.stringify(this.props.userPanel.user.points)) {
+            if(this.state.markerLayer) {
+                this.state.map.removeLayer(this.state.markerLayer);
+            }
+
+            let markerLayer = L.layerGroup().addTo(this.state.map);
+
+            this.props.userPanel.user.points.forEach(point => {
+                const node = this.state.graph.getNode(point.nodeId);
+                if (node) {
+                    L.marker([node.data.lat, node.data.lon])
+                        .bindTooltip(point.name, {
+                            permanent: false
+                        })
+                        .addTo(markerLayer);
+                }
+            });
+
+            if(this.props.userPanel.user.points[0]) {
+                this.props.setStartPoint(this.props.userPanel.user.points[0].nodeId);
+                this.props.setEndPoint(this.props.userPanel.user.points[0].nodeId);
+            }
+
+            this.setState({markerLayer: markerLayer});
+        }
         //проверка на наличие данных в props, которые в свою очередь привязаны к state в redux store
         if(this.props.controlPanel.startPoint && this.props.controlPanel.endPoint && this.props.controlPanel.algorithm) {
             //проверка на то, что изменились именно props компонента, а не state
@@ -232,41 +217,42 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
 
                         let bounds = new LatLngBounds([pointALat, pointALon], [pointBLat, pointBLon]);
 
-                        if(this.state.graphLayer) {
+                        if (this.state.graphLayer) {
                             this.state.map.removeLayer(this.state.graphLayer);
                         }
 
                         let lines: any = [];
 
-                        this.state.graph.forEachNode((node: Node): boolean => {
-                            if(bounds.contains([node.data.lat, node.data.lon])) {
-                                node.links.forEach((link: Link): void => {
-                                    if(link.fromId === node.id) {
-                                        //рисуем только те ребра (link), которые ведут к ноду
-                                        let toNode = this.state.graph.getNode(link.toId);
-                                        if(toNode) {
-                                            let distance = Math.round(this.distance(node, toNode)).toString();
-                                            let line = L.polyline([[node.data.lat, node.data.lon], [toNode.data.lat, toNode.data.lon]], {
-                                                color: 'green'
-                                            }).bindTooltip(distance, {
-                                                permanent:false
-                                            });
-                                            lines.push(line);
+                        if (this.props.controlPanel.startPoint !== this.props.controlPanel.endPoint) {
+                            this.state.graph.forEachNode((node: Node): boolean => {
+                                if (bounds.contains([node.data.lat, node.data.lon])) {
+                                    node.links.forEach((link: Link): void => {
+                                        if (link.fromId === node.id) {
+                                            //рисуем только те ребра (link), которые ведут к ноду
+                                            let toNode = this.state.graph.getNode(link.toId);
+                                            if (toNode) {
+                                                let distance = Math.round(this.distance(node, toNode)).toString();
+                                                let line = L.polyline([[node.data.lat, node.data.lon], [toNode.data.lat, toNode.data.lon]], {
+                                                    color: 'green'
+                                                }).bindTooltip(distance, {
+                                                    permanent: false
+                                                });
+                                                lines.push(line);
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
+                                return false;
+                            });
+
+                            let graphLayer = L.layerGroup(lines)
+                                .addTo(this.state.map);
+
+                            if (prevState.graphLayer !== graphLayer) {
+                                this.setState({graphLayer: graphLayer});
                             }
-                            return false;
-                        });
-
-                        let graphLayer = L.layerGroup(lines)
-                            .addTo(this.state.map);
-
-                        if(prevState.graphLayer !== graphLayer) {
-                            this.setState({ graphLayer: graphLayer });
                         }
                     }
-
                 }
 
                 //расчет непосредственно маршрута
@@ -274,60 +260,82 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
                     prevProps.controlPanel.endPoint !== this.props.controlPanel.endPoint ||
                     prevProps.controlPanel.algorithm !== this.props.controlPanel.algorithm) {
 
-                    let pathfinder: PathFinder<NodeData>;
+                    let path: LatLngExpression[];
+                    let pathLength: number;
 
-                    switch (this.props.controlPanel.algorithm) {
-                        case 'aGreedy':
-                            pathfinder = aGreedy(this.state.graph, {distance: this.distance, heuristic: this.distance});
-                            break;
-                        case 'aStar':
-                            pathfinder = aStarPathSearch(this.state.graph, {distance: this.distance, heuristic: this.distance});
-                            break;
-                        case 'dijkstra':
-                            pathfinder = aStarPathSearch(this.state.graph, {distance: this.distance, heuristic: this.dijkstraHeuristic});
-                            break;
-                        default:
-                            return;
+                    const storedRoutes = localStorage.getItem('routes');
+                    if (storedRoutes) {
+                        let routes: Route[] = JSON.parse(storedRoutes);
+
+                        const foundRoute = routes.find(route =>
+                            (route.start === this.props.controlPanel.startPoint && route.end === this.props.controlPanel.endPoint && route.algorithm === this.props.controlPanel.algorithm) ||
+                            (route.start === this.props.controlPanel.endPoint && route.end === this.props.controlPanel.startPoint &&  route.algorithm === this.props.controlPanel.algorithm)
+                        )
+
+                        if (foundRoute) {
+                            path = foundRoute.data;
+                            pathLength = foundRoute.pathLength;
+                        } else {
+                            let pathfinder: PathFinder<NodeData>;
+
+                            switch (this.props.controlPanel.algorithm) {
+                                case 'aGreedy':
+                                    pathfinder = aGreedy(this.state.graph, {distance: this.distance, heuristic: this.distance});
+                                    break;
+                                case 'aStar':
+                                    pathfinder = aStarPathSearch(this.state.graph, {distance: this.distance, heuristic: this.distance});
+                                    break;
+                                case 'dijkstra':
+                                    pathfinder = aStarPathSearch(this.state.graph, {distance: this.distance, heuristic: this.dijkstraHeuristic});
+                                    break;
+                                default:
+                                    return;
+                            }
+
+                            const result = pathfinder.find(this.props.controlPanel.startPoint, this.props.controlPanel.endPoint);
+
+                            path = result.map(element => {
+                                return [element.data.lat, element.data.lon]
+                            });
+
+                            //Расчет длины пути для отображения в controlPanel
+                            pathLength = 0;
+                            for (let i = 1; i < result.length; ++i) {
+                                let length = this.distance(result[i], result[i-1]);
+                                pathLength += length;
+                            }
+
+                            //Запись рассчитанного маршрута в localStorage
+                            const newRoute: Route = {
+                                start: this.props.controlPanel.startPoint,
+                                end: this.props.controlPanel.endPoint,
+                                algorithm: this.props.controlPanel.algorithm,
+                                data: path,
+                                pathLength: pathLength
+                            }
+                            routes.push(newRoute);
+                            localStorage.setItem('routes', JSON.stringify(routes));
+                        }
+
+                        //Отрисовка маршрута
+                        if(this.state.polyline) {
+                            this.state.map.removeLayer(this.state.polyline);
+                        }
+
+                        let polyline = L.polyline(path, {
+                            color: 'red',
+                            interactive: false
+                        })
+                            .addTo(this.state.map);
+
+
+                        if(prevState.polyline !== polyline) {
+                            this.setState({ polyline: polyline });
+                        }
+
+                        // Вывод длины пути
+                        this.props.setPathLength(Math.round(pathLength).toString());
                     }
-
-                    if(this.state.polyline) {
-                        this.state.map.removeLayer(this.state.polyline);
-                    }
-
-                    const result = pathfinder.find(this.props.controlPanel.startPoint, this.props.controlPanel.endPoint);
-
-                    const path: LatLngExpression[] = result.map(element => {
-                        return [element.data.lat, element.data.lon]
-                    });
-
-                    let polyline = L.polyline(path, {
-                        color: 'red',
-                        interactive: false
-                    })
-                        .addTo(this.state.map);
-
-
-                    if(prevState.polyline !== polyline) {
-                        this.setState({ polyline: polyline });
-                    }
-
-                    // result.forEach((element, index) => {
-                    //     if(result[index+1]){
-                    //         let distance = this.distance(result[index], result[index+1]).toString();
-                    //         L.polyline([[result[index].data.lat, result[index].data.lon], [result[index+1].data.lat, result[index+1].data.lon]], {
-                    //             color: 'red'
-                    //         }).bindTooltip(distance)
-                    //             .addTo(this.state.map);
-                    //     }
-                    // });
-
-                    //расчет длины пути для отображения в controlPanel
-                    let pathLength = 0;
-                    for (let i = 1; i < result.length; ++i) {
-                        let length = this.distance(result[i], result[i-1]);
-                        pathLength += length;
-                    }
-                    this.props.setPathLength(Math.round(pathLength).toString());
                 }
             }
         }
@@ -362,10 +370,11 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
 }
 
 const mapStateToProps = (state: AppState) => ({
-    controlPanel: state.controlPanel
+    controlPanel: state.controlPanel,
+    userPanel: state.userPanel,
 });
 
 export default connect(
     mapStateToProps,
-    { setPathLength }
+    { setStartPoint, setEndPoint, setPathLength, alertClear, addNewPointEnd, addNewPoint, getPoints }
 )(MapPanelInterface);

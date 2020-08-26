@@ -1,7 +1,9 @@
 <component name="ProjectDictionaryState">
   <dictionary name="adela">
     <words>
+      <w>addnewpoint</w>
       <w>fscore</w>
+      <w>getpoints</w>
       <w>haversine</w>
       <w>middlewares</w>
       <w>ngraph</w>

@@ -2,14 +2,29 @@
   text-align: center;
 }
 
-.control-panel-selector {
+.pathfinder-interface, .login-interface, .home-interface {
   display: inline-block;
+}
+
+.control-panel-selector, .control-panel-input {
+  display: inline-block;
+  margin-top: 1px;
+  margin-left: 10px;
+}
+
+.login-interface-alert, .login-interface-username, .login-interface-password, .login-interface-submit, .home-interface-alert, .home-interface-add-new-point-button, .home-interface-logout {
   margin-right: 10px;
 }
 
-.control-panel-input {
-  display: inline-block;
-  margin-right: 10px;
+.login-interface-submit, .home-interface-add-new-point-button, .home-interface-logout {
+  margin-top: 24px;
+}
+
+.login-interface-alert, .home-interface-alert {
+  margin-bottom: 0;
+  margin-top: 24px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .control-panel-input label select, .control-panel-selector label select {

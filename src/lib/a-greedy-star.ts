@@ -157,6 +157,7 @@ function aGreedy(graph: Graph, options: PathfinderOptions) {
         }
 
         function reconstructBiDirectionalPath(a: NodeSearchState, b: NodeSearchState) {
+            // console.log(`END`);
             let pathOfNodes = [];
             let aParent = a;
             while(aParent) {

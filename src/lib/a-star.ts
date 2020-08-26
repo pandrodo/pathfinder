@@ -3,7 +3,6 @@ import makeSearchStatePool from "./makeSearchStatePool";
 import NodeHeap from "./NodeHeap";
 
 import { Graph } from 'ngraph.graph';
-import React from "react";
 
 const NO_PATH = defaultSettings.NO_PATH;
 
@@ -55,16 +54,6 @@ function aStarPathSearch(graph: Graph, options: PathfinderOptions) {
     };
 
     function find(fromId: NodeId, toId: NodeId) {
-        let nodes = new Map();
-        nodes.set(5998899980, 1);
-        nodes.set(5998899981, 2);
-        nodes.set(5998899975, 3);
-        nodes.set(5998899976, 4);
-        nodes.set(5998899977, 5);
-        nodes.set(5998899978, 6);
-        nodes.set(5998899979, 7);
-        nodes.set(5998899974, 8);
-        console.log('======START=====');
         let from = graph.getNode(fromId);
         if (!from) throw new Error('fromId is not defined in this graph: ' + fromId);
         let to = graph.getNode(toId);
@@ -94,12 +83,22 @@ function aStarPathSearch(graph: Graph, options: PathfinderOptions) {
         let cameFrom: NodeSearchState;
 
         while (openSet.length > 0) {
-            // console.log(`OPEN SET CONTAINS: `);
-            // openSet.data.forEach(element => console.log(nodes.get(element.node.id)));
-            // console.log(`ELEMENTS`);
+            // Количество вершин, которые обошел агоритм
+            // console.log(`States in map: ${nodeState.size}`);
+
+            // Расчет количества уникальных ребер, соединенных с этими вершинами
+            // let links: string[] = [];
+            // nodeState.forEach(function (entry) {
+            //     entry.node.links.forEach(function (link: Link) {
+            //         if(!links.includes(link.id)) {
+            //             links.push(link.id);
+            //         }
+            //     });
+            // });
+            // console.log(`Links in map: ${links.length}`);
+
             cameFrom = openSet.pop();
-            // console.log(`Current node ${nodes.get(cameFrom.node.id)} with distance to source ${cameFrom.distanceToSource} and heuristic ${heuristic(cameFrom.node, to)}`);
-            console.log(`Current node ${nodes.get(cameFrom.node.id)}`);
+
             if (goalReached(cameFrom, to)) return reconstructPath(cameFrom);
 
             // no need to visit this node anymore
@@ -119,7 +118,6 @@ function aStarPathSearch(graph: Graph, options: PathfinderOptions) {
 
             if (otherSearchState.closed) {
                 // Already processed this node.
-                console.log(`${nodes.get(otherSearchState.node.id)} - ${nodes.get(cameFrom.node.id)} already processed`);
                 return;
             }
             if (otherSearchState.open === 0) {
@@ -131,7 +129,6 @@ function aStarPathSearch(graph: Graph, options: PathfinderOptions) {
             let tentativeDistance = cameFrom.distanceToSource + distance(otherNode, cameFrom.node);
             if (tentativeDistance >= otherSearchState.distanceToSource) {
                 // This would only make our path longer. Ignore this route.
-                console.log(`${nodes.get(otherSearchState.node.id)} - ${nodes.get(cameFrom.node.id)} make our path only longer`);
                 return;
             }
 
@@ -139,7 +136,6 @@ function aStarPathSearch(graph: Graph, options: PathfinderOptions) {
             otherSearchState.parent = cameFrom;
             otherSearchState.distanceToSource = tentativeDistance;
             if(to) {
-                console.log(`Visiting node ${nodes.get(otherNode.id)} with distance to source ${Math.round(otherSearchState.distanceToSource)} and heuristic ${Math.round(heuristic(otherSearchState.node, to))}`);
                 otherSearchState.fScore = tentativeDistance + heuristic(otherSearchState.node, to);
             }
 
@@ -153,7 +149,6 @@ function goalReached(searchState: NodeSearchState, targetNode: Node) {
 }
 
 function reconstructPath(searchState: NodeSearchState) {
-    console.log('======END=====');
     let path = [searchState.node];
     let parent = searchState.parent;
 
