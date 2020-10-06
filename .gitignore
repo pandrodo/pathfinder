@@ -1,9 +1,5 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
 
 # testing
 /coverage
@@ -13,6 +9,9 @@
 
 # documentation
 /documentation
+
+# ide
+/.idea
 
 # misc
 .DS_Store

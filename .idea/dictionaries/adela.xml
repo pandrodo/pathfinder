@@ -6,7 +6,9 @@
       <w>getpoints</w>
       <w>haversine</w>
       <w>middlewares</w>
+      <w>msapplication</w>
       <w>ngraph</w>
+      <w>webmanifest</w>
     </words>
   </dictionary>
 </component>
