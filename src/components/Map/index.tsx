@@ -1,24 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import './style.css';
+
 import createGraph, {Graph, Link, Node, NodeId} from 'ngraph.graph';
 
-import aStarPathSearch from "../lib/a-star";
-import aGreedy from "../lib/a-greedy-star";
+import aStarPathSearch from "../../lib/a-star";
+import aGreedy from "../../lib/a-greedy-star";
 
 import L, {LatLngBounds, Layer, LayerGroup, LeafletMouseEvent} from 'leaflet';
 import { Map, LatLngExpression } from "leaflet";
 
-import { AppState } from "../store";
-import { ControlPanelState } from "../store/controlPanel/types";
-import { setStartPoint, setEndPoint, setPathLength } from "../store/controlPanel/actions";
-import { alertClear } from "../store/alerts/actions";
-import { UserPanelState } from "../store/users/types";
-import { addNewPointEnd, addNewPoint, getPoints } from "../store/users/actions";
+import { AppState } from "../../store";
+import { ControlPanelState } from "../../store/controlPanel/types";
+import { setStartPoint, setEndPoint, setPathLength } from "../../store/controlPanel/actions";
+import { alertClear } from "../../store/alerts/actions";
+import { UserPanelState } from "../../store/users/types";
+import { addNewPointEnd, addNewPoint, getPoints } from "../../store/users/actions";
 
-import kirovRoads from '../assets/kirov-roads.json';
+import kirovRoads from '../../assets/kirov-roads.json';
 
-interface MapPanelInterfaceProps {
+interface LeafletMapProps {
     controlPanel: ControlPanelState;
     userPanel: UserPanelState;
     setPathLength: typeof setPathLength;
@@ -30,7 +32,7 @@ interface MapPanelInterfaceProps {
     getPoints: typeof getPoints;
 }
 
-interface MapPanelInterfaceState {
+interface LeafletMapState {
     graph: Graph;
     graphLayer: LayerGroup;
     markerLayer: LayerGroup;
@@ -55,8 +57,8 @@ interface Route {
     pathLength: number;
 }
 
-class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanelInterfaceState> {
-    constructor(props: MapPanelInterfaceProps, state: MapPanelInterfaceState) {
+class LeafletMap extends React.Component<LeafletMapProps, LeafletMapState> {
+    constructor(props: LeafletMapProps, state: LeafletMapState) {
         super(props, state);
 
         this.handleMapClick = this.handleMapClick.bind(this);
@@ -146,7 +148,7 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
     };
 
     //componentDidUpdate вызывается при каждом изменении props/state компонента
-    componentDidUpdate(prevProps: MapPanelInterfaceProps, prevState: MapPanelInterfaceState): void {
+    componentDidUpdate(prevProps: LeafletMapProps, prevState: LeafletMapState): void {
         //Проверка наличия записи в localStorage
         const storedRoutes = localStorage.getItem('routes');
         if (!storedRoutes) {
@@ -361,10 +363,7 @@ class MapPanelInterface extends React.Component<MapPanelInterfaceProps, MapPanel
 
     render() {
         return (
-            <div className='map-panel'>
-                <div id='map'>
-                </div>
-            </div>
+            <div id='map' className='map'/>
         );
     }
 }
@@ -377,4 +376,4 @@ const mapStateToProps = (state: AppState) => ({
 export default connect(
     mapStateToProps,
     { setStartPoint, setEndPoint, setPathLength, alertClear, addNewPointEnd, addNewPoint, getPoints }
-)(MapPanelInterface);
+)(LeafletMap);

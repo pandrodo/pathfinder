@@ -14,17 +14,17 @@ export function alertReducer(
     switch (action.type) {
         case ALERT_SUCCESS:
             return update(state, {
-                style: { $set: 'alert-success' },
+                style: { $set: 'success' },
                 message: { $set: action.message }
             });
         case ALERT_WARNING:
             return update(state, {
-                style: { $set: 'alert-warning' },
+                style: { $set: 'warning' },
                 message: { $set: action.message }
             });
         case ALERT_ERROR:
             return update(state, {
-                style: { $set: 'alert-danger' },
+                style: { $set: 'danger' },
                 message: { $set: action.message }
             });
         case ALERT_CLEAR:

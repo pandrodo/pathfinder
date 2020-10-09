@@ -1,0 +1,36 @@
+.application {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.application > *:last-child {
+    flex-grow: 1;
+}
+
+.control-panel {
+    display: flex;
+    flex-flow: column;
+    margin: 0 0 1rem;
+}
+
+.user-panel {
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+}
+
+@media screen and (min-width: 992px) {
+    .control-panel {
+        flex-flow: row;
+        justify-content: space-between;
+        margin: 0.5rem 0 1rem;
+    }
+
+    .user-panel {
+        flex-flow: row;
+        align-items: flex-end;
+        margin: 0 0 0 0.5rem;
+    }
+}

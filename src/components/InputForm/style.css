@@ -1,0 +1,33 @@
+.input-form {
+    display: flex;
+    flex-flow: column;
+}
+
+.input-form__item {
+    display: flex;
+    flex-flow: column;
+    margin: .5rem .5rem 0;
+}
+
+.input-form__label {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.input-form__select {
+    width: 100%;
+    padding: .375rem 1.75rem .375rem .75rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+@media screen and (min-width: 992px) {
+    .input-form {
+        flex-flow: row wrap;
+    }
+
+    .input-form__item {
+        width: calc(33.33% - .5rem);
+        margin: 0 0 0 .5rem;
+    }
+}
