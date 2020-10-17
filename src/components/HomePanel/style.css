@@ -1,0 +1,41 @@
+.new-point-form {
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+}
+
+.new-point-form__button {
+    width: 100%;
+    padding: .375rem .75rem;
+    margin: 0.5rem 0 0.5rem;
+    border: 1px solid #343a40;
+    border-radius: .25rem;
+    background-color: #343a40;
+    color: #fff;
+    cursor: pointer;
+}
+
+.new-point-form__button:last-of-type {
+    margin: 0.5rem 0 0;
+}
+
+@media screen and (min-width: 992px) {
+    .new-point-form {
+        flex-flow: row;
+        align-items: flex-end;
+        margin: 0 0 0 0.5rem;
+    }
+
+    .new-point-form__button {
+        margin: 0 0 0 0.5rem;
+    }
+
+    .new-point-form__button:first-of-type {
+        margin: 0;
+    }
+
+    .new-point-form__button:last-of-type {
+        margin: 0 0 0 0.5rem;
+    }
+
+}

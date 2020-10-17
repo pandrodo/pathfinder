@@ -1,12 +1,17 @@
 .login-form {
     display: flex;
     flex-flow: column;
+    margin: 0;
 }
 
 .login-form__item {
     display: flex;
     flex-flow: column;
-    margin: .5rem .5rem 0;
+    margin: 0 0 0.5rem;
+}
+
+.login-form__item:last-of-type {
+    margin: 0;
 }
 
 .login-form__label {
@@ -24,6 +29,7 @@
 .login-form__button {
     width: 100%;
     padding: .375rem .75rem;
+    margin: .5rem 0 0 0;
     border: 1px solid #343a40;
     border-radius: .25rem;
     background-color: #343a40;
@@ -31,20 +37,24 @@
     cursor: pointer;
 }
 
-.login-form__button {
-    margin: .5rem 0 0 0;
-    overflow: hidden;
-}
-
 @media screen and (min-width: 992px) {
     .login-form {
         flex-flow: row;
         align-items: flex-end;
+        margin: 0 0 0 0.5rem;
     }
 
     .login-form__item {
         min-width: 0;
-        width: calc(25% - .5rem);
-        margin: 0 .5rem 0 0;
+        width: calc(25% - .375rem);
+        margin: 0 0 0 0.5rem;
+    }
+
+    .login-form__item:first-of-type {
+        margin: 0;
+    }
+
+    .login-form__item:last-of-type {
+        margin: 0 0 0 0.5rem;
     }
 }

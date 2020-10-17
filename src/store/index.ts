@@ -1,24 +1,25 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunkMiddleware from "redux-thunk";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-import { controlPanelReducer } from "./controlPanel/reducers";
+import { inputFormReducer } from "./inputForm/reducers";
+import { mapReducer } from "./map/reducers";
 import { alertReducer } from "./alerts/reducers";
 import { usersReducer } from "./users/reducers";
 
 const rootReducer = combineReducers({
     alert: alertReducer,
-    controlPanel: controlPanelReducer,
+    inputForm: inputFormReducer,
     userPanel: usersReducer,
-    // mapPanel: mapPanelReducer,
+    map: mapReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>
 
 export default function configureStore() {
     return createStore(
-        rootReducer,
-        applyMiddleware(
-            thunkMiddleware,
+        rootReducer, composeWithDevTools(
+            applyMiddleware(thunk),
         )
     );
 }

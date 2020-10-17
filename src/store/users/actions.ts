@@ -17,7 +17,7 @@ import {alertClear, alertError, alertSuccess} from "../alerts/actions";
 
 export function login(username: string, password: string): ThunkAction<any, any, any, any>  {
     return (dispatch) => {
-        dispatch(request({ username: username, token: '', points: [] }));
+        dispatch(request({ username: username, token: '' }));
 
         loginUser(username, password)
             .then(
@@ -84,7 +84,10 @@ export function addNewPoint(username: string, nodeId: string, name: string): Thu
     return (dispatch) => {
         addNewUserPoint(username, nodeId, name)
             .then(
-                message => dispatch(alertSuccess(message)),
+                message => {
+                    dispatch(alertSuccess(message));
+                    dispatch(getPoints(username));
+                },
                 error => dispatch(alertError(error))
             );
     };

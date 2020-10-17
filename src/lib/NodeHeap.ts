@@ -63,11 +63,11 @@ export default function NodeHeap(data: NodeSearchState[], options: NodeHeapOptio
         for (let i = (nodeHeap.length >> 1); i >= 0; i--) nodeHeap._down(i);
     }
 
-    if (options.setNodeId) {
+    // if (options.setNodeId) {
         for (let i = 0; i < nodeHeap.length; ++i) {
             nodeHeap.setNodeId(nodeHeap.data[i], i);
         }
-    }
+    // }
 
     function push(item: NodeSearchState) {
         nodeHeap.data.push(item);

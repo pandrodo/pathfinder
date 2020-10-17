@@ -5,14 +5,14 @@ export interface Point {
 
 export interface User {
     username: string,
-    token: string,
-    points: Point[]
+    token: string
 }
 
 export interface UserPanelState {
     addingNewPoint: boolean,
     loggingIn: boolean,
     loggedIn: boolean,
+    points: Point[],
     user: User
 }
 

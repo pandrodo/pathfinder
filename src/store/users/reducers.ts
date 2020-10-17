@@ -30,7 +30,8 @@ let initialState: UserPanelState = {
     addingNewPoint: false,
     loggingIn: false,
     loggedIn: false,
-    user: { username: '', token: '', points: defaultPoints }
+    points: defaultPoints,
+    user: { username: '', token: '' }
 };
 
 const storedUser = localStorage.getItem('user');
@@ -40,6 +41,7 @@ if (storedUser) {
         addingNewPoint: false,
         loggingIn: false,
         loggedIn: true,
+        points: [],
         user: user
     };
 }
@@ -64,13 +66,14 @@ export function usersReducer(
             return update(state, {
                 loggingIn: { $set: false },
                 loggedIn: { $set: false },
-                user: { $set: { username: '', token: '', points: defaultPoints} }
+                user: { $set: { username: '', token: '' } }
             });
         case USERS_LOGOUT:
             return update(state, {
                 loggingIn: { $set: false},
                 loggedIn: { $set: false},
-                user: { $set: { username: '', token: '', points: defaultPoints}}
+                points: { $set: defaultPoints },
+                user: { $set: { username: '', token: ''} }
             });
         case USERS_ADDNEWPOINT_START:
             return update(state, {
@@ -82,11 +85,11 @@ export function usersReducer(
             });
         case USERS_GETPOINTS_SUCCESS:
             return update(state, {
-                user: { points: { $set: action.points } }
+                points: { $set: action.points },
             });
         case USERS_GETPOINTS_FAILURE:
             return update(state, {
-                user: { points: { $set: defaultPoints } }
+                points: { $set: defaultPoints },
             });
         default:
             return state;

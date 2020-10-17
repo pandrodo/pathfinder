@@ -4,11 +4,11 @@ export function authHeader() {
         const user = JSON.parse(storedUser);
 
         if (user.username !== '' && user.token !== '') {
-            return { 'x-access-token' : user.token }
+            return { 'x-access-token': user.token }
         } else {
-            return {};
+            return null;
         }
     } else {
-        return {};
+        return null;
     }
 }

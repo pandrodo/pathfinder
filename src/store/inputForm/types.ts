@@ -1,4 +1,4 @@
-export interface ControlPanelState {
+export interface InputFormState {
     startPoint: string;
     endPoint: string;
     algorithm: string;
@@ -30,4 +30,4 @@ interface SetPathLengthAction {
     pathLength: string;
 }
 
-export type ControlPanelTypes = SetStartPointAction | SetEndPointAction | SetAlgorithmAction | SetPathLengthAction
+export type InputFormTypes = SetStartPointAction | SetEndPointAction | SetAlgorithmAction | SetPathLengthAction

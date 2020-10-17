@@ -7,7 +7,7 @@ import Alert from "../Alert";
 import InputForm from "../InputForm";
 import HomePanel from "../HomePanel";
 import LoginForm from "../LoginForm";
-import Map from "../Map";
+import LeafletMap from "../LeafletMap";
 import { AppState } from "../../store";
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
                     { loggedIn ? <HomePanel /> : <LoginForm /> }
                 </div>
             </div>
-            <Map />
+            <LeafletMap />
         </div>
     );
 }

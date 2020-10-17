@@ -6,7 +6,7 @@
 .input-form__item {
     display: flex;
     flex-flow: column;
-    margin: .5rem .5rem 0;
+    margin: 0 0 0.5rem;
 }
 
 .input-form__label {
@@ -27,7 +27,11 @@
     }
 
     .input-form__item {
-        width: calc(33.33% - .5rem);
-        margin: 0 0 0 .5rem;
+        width: calc(33.33% - .34rem);
+        margin: 0 0.5rem 0 0;
+    }
+
+    .input-form__item:last-of-type {
+        margin: 0;
     }
 }
