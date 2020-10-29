@@ -1,5 +1,5 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunk from "redux-thunk";
+import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
+import thunk, {ThunkDispatch} from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { inputFormReducer } from "./inputForm/reducers";
@@ -14,12 +14,13 @@ const rootReducer = combineReducers({
     map: mapReducer,
 });
 
-export type AppState = ReturnType<typeof rootReducer>
+export type AppState = ReturnType<typeof rootReducer>;
+export type DispatchFunctionType = ThunkDispatch<AppState, undefined, AnyAction>;
 
 export default function configureStore() {
     return createStore(
         rootReducer, composeWithDevTools(
-            applyMiddleware(thunk),
+            applyMiddleware<DispatchFunctionType, AppState>(thunk),
         )
     );
 }

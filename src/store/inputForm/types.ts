@@ -2,13 +2,11 @@ export interface InputFormState {
     startPoint: string;
     endPoint: string;
     algorithm: string;
-    pathLength: string;
 }
 
 export const SET_START_POINT = 'SET_START_POINT';
 export const SET_END_POINT = 'SET_END_POINT';
 export const SET_ALGORITHM = 'SET_ALGORITHM';
-export const SET_PATH_LENGTH = 'SET_PATH_LENGTH';
 
 interface SetStartPointAction {
     type: typeof SET_START_POINT;
@@ -25,9 +23,4 @@ interface SetAlgorithmAction {
     algorithm: string;
 }
 
-interface SetPathLengthAction {
-    type: typeof SET_PATH_LENGTH;
-    pathLength: string;
-}
-
-export type InputFormTypes = SetStartPointAction | SetEndPointAction | SetAlgorithmAction | SetPathLengthAction
+export type InputFormTypes = SetStartPointAction | SetEndPointAction | SetAlgorithmAction;

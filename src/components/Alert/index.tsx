@@ -9,7 +9,7 @@ const Alert = () => {
     const alert = useSelector((state: AppState) => state.alert);
 
     return (
-        <div className={`alert alert_${alert.style}`}>
+        <div role='alert' aria-label='Error' className={`alert alert_${alert.style}`}>
             { alert.message }
         </div>
     );

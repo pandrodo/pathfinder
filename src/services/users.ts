@@ -11,16 +11,26 @@ export function loginUser(username: string, password: string) {
 
     return fetch('http://127.0.0.1:3000/loginUser', requestOptions)
         .then(handleResponse)
-        .then(message => {
-            const user = { username: message.username, token: message.token, points: [] };
-            localStorage.setItem('user', JSON.stringify(user));
+        .then(response => {
+            localStorage.setItem('user', JSON.stringify(response.user));
 
-            return user;
+            return response;
         });
 }
 
 export function logoutUser() {
     localStorage.removeItem('user');
+}
+
+export function registrationUser(username: string, password: string) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ username: username, password: password})
+    };
+
+    return fetch('http://127.0.0.1:3000/registerUser', requestOptions)
+        .then(handleResponse);
 }
 
 export function addNewUserPoint(username: string, nodeId: string, name: string) {
@@ -34,10 +44,7 @@ export function addNewUserPoint(username: string, nodeId: string, name: string) 
     };
 
     return fetch('http://127.0.0.1:3000/addUserPoint', requestOptions)
-        .then(handleResponse)
-        .then(response => {
-            return response.message;
-        });
+        .then(handleResponse);
 }
 
 export function getUserPoints(username: string) {
@@ -51,28 +58,7 @@ export function getUserPoints(username: string) {
     };
 
     return fetch('http://127.0.0.1:3000/getUserPoints', requestOptions)
-        .then(handleResponse)
-        .then(message => {
-            const validKeys = ['nodeId', 'name'];
-            message.forEach((point: any) => Object.keys(point).forEach((key) => validKeys.includes(key) || delete point[key]));
-            message.forEach((point: any) => point.nodeId = String(point.nodeId));
-
-            return message;
-        });
-}
-
-export function registrationUser(username: string, password: string) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ username: username, password: password})
-    };
-
-    return fetch('http://127.0.0.1:3000/registerUser', requestOptions)
-        .then(handleResponse)
-        .then(response => {
-            return response.message;
-        });
+        .then(handleResponse);
 }
 
 function handleResponse(response: Response) {
@@ -85,6 +71,7 @@ function handleResponse(response: Response) {
             }
 
             const error = (data && data.message) || response.statusText;
+
             return Promise.reject(error);
         }
 

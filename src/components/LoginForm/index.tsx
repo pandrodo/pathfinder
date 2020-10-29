@@ -1,73 +1,79 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
-import './style.css';
-
+import {alertError} from "../../store/alerts/actions";
 import {login, registration} from "../../store/users/actions";
 import {AppState} from "../../store";
+
+import './style.css';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [submitType, setSubmitType] = useState('');
+
     const loggingIn = useSelector((state: AppState) => state.userPanel.loggingIn);
 
     const dispatch = useDispatch();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        if (username && password) {
-            if (submitType === 'login') dispatch(login(username, password));
-            if (submitType === 'registration') dispatch(registration(username, password));
+    const clickHandler = (action: typeof login | typeof registration) => {
+        if (username !== '') {
+            if (password !== '') {
+                dispatch(action(username, password));
+            } else {
+                dispatch(alertError('Password is empty'));
+            }
+        } else {
+            dispatch(alertError('Username is empty'));
         }
     }
 
     return (
-        <form className='login-form'
-              name='login-form'
-              onSubmit={handleSubmit}>
+        <div className='login-form' role='form' aria-label="Login Form">
             <div className='login-form__item'>
                 <label className='login-form__label'>
                     Логин
+                    <input className='login-form__input'
+                           type='text'
+                           name='username'
+                           autoComplete='on'
+                           value={username}
+                           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
+                    />
                 </label>
-                <input className='login-form__input'
-                       type='text'
-                       name='username'
-                       autoComplete='on'
-                       value={username}
-                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
-                />
             </div>
             <div className='login-form__item'>
                 <label className='login-form__label'>
                     Пароль
+                    <input className='login-form__input'
+                           type='password'
+                           name='password'
+                           autoComplete='on'
+                           value={password}
+                           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+                    />
                 </label>
-                <input className='login-form__input'
-                       type='password'
-                       name='password'
-                       autoComplete='on'
-                       value={password}
-                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
-                />
             </div>
             <div className='login-form__item'>
-                <input className='login-form__button'
+                <button className='login-form__button'
                        type='submit'
-                       value='Войти'
+                       value='login'
                        disabled={loggingIn}
-                       onClick={() => setSubmitType('login')}
-                />
+                       onClick={() => clickHandler(login)}
+                >
+                    Войти
+                </button>
             </div>
             <div className='login-form__item'>
-                <input className='login-form__button'
+                <button className='login-form__button'
                        type='submit'
-                       value='Регистрация'
+                       value='registration'
                        disabled={loggingIn}
-                       onClick={() => setSubmitType('registration')}
-                />
+                       onClick={() => clickHandler(registration)}
+                >
+                    Регистрация
+                </button>
             </div>
-        </form>
+        </div>
     );
 }
 

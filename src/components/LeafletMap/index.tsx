@@ -35,7 +35,7 @@ const LeafletMap = () => {
     const inputForm = useSelector((state: AppState) => state.inputForm);
     const userName = useSelector((state: AppState) => state.userPanel.user.username);
     const points = useSelector((state: AppState) => state.userPanel.points);
-    const addingNewPoint = useSelector((state: AppState) => state.userPanel.addingNewPoint);
+    const selectingPointOnMap = useSelector((state: AppState) => state.userPanel.selectingPointOnMap);
 
     const dispatch = useDispatch();
 
@@ -77,7 +77,7 @@ const LeafletMap = () => {
             if (element.type === 'node') {
                 graph.addNode(element.id, { lat: element.lat, lon: element.lon });
             }
-            else if (element.type === 'way' ) {
+            else {
                 const nodes = element.nodes;
                 for (let i = 1; i < nodes.length; ++i) {
                     graph.addLink(nodes[i], nodes[i-1]);
@@ -101,10 +101,8 @@ const LeafletMap = () => {
 
         // Put list of available pathfinders to redux store
         const availablePathfinders = [];
-        for (const [key, value] of Object.entries(pathfinders)) {
-            if (value) {
-                availablePathfinders.push(key);
-            }
+        for (const key of Object.keys(pathfinders)) {
+            availablePathfinders.push(key);
         }
         dispatch(setAvailablePathfinders(availablePathfinders));
 
@@ -134,7 +132,7 @@ const LeafletMap = () => {
 
             // Fill marker group layer with user points
             points.forEach(point => {
-                const node = graph.getNode(point.nodeId);
+                const node = graph.getNode(parseInt(point.nodeId));
                 if (node) {
                     L.marker([node.data.lat, node.data.lon])
                         .bindTooltip(point.name, {
@@ -159,14 +157,12 @@ const LeafletMap = () => {
             if (storedRoute) {
                 route = JSON.parse(storedRoute);
             } else {
-                const path = pathfinders[inputForm.algorithm]?.find(inputForm.startPoint, inputForm.endPoint);
+                const path = pathfinders[inputForm.algorithm]?.find(parseInt(inputForm.startPoint), parseInt(inputForm.endPoint));
                 if (path) {
                     route = path.map(element => {
                         return new L.LatLng(element.data.lat, element.data.lon);
                     });
-                    if (route) {
-                        localStorage.setItem(routeID, JSON.stringify(route));
-                    }
+                    localStorage.setItem(routeID, JSON.stringify(route));
                 }
             }
 
@@ -183,17 +179,14 @@ const LeafletMap = () => {
         const newPoint = {id: '', links: [], data: {lat: event.latlng.lat, lon: event.latlng.lng }};
         const currentNearestNode = {id: '', distance: Infinity};
 
-        if (graph) {
-            graph.forEachNode((currentNode) => {
-                const d = distance(newPoint, currentNode);
-                if (d < currentNearestNode.distance) {
-                    currentNearestNode.id = currentNode.id.toString();
-                    currentNearestNode.distance = d;
-                }
-                return false;
-            });
-        }
-
+        graph?.forEachNode((currentNode) => {
+            const d = distance(newPoint, currentNode);
+            if (d < currentNearestNode.distance) {
+                currentNearestNode.id = currentNode.id.toString();
+                currentNearestNode.distance = d;
+            }
+            return false;
+        });
         const newPointName = prompt('Введите название для выбранной точки');
         if (newPointName) {
             dispatch(addNewPoint(userName, currentNearestNode.id, newPointName));
@@ -202,13 +195,13 @@ const LeafletMap = () => {
 
     useEffect(() => {
         if (leafletMap) {
-            if (addingNewPoint) {
+            if (selectingPointOnMap) {
                 leafletMap.on('click', leafletMapClickHandler);
             } else {
                 leafletMap.off('click', leafletMapClickHandler);
             }
         }
-    }, [leafletMap, leafletMapClickHandler, addingNewPoint]);
+    }, [leafletMap, leafletMapClickHandler, selectingPointOnMap]);
 
     return (
         <div id='map'/>

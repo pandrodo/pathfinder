@@ -1,15 +1,21 @@
 import update from 'immutability-helper';
 
 import {
-    USERS_ADDNEWPOINT_END,
-    USERS_ADDNEWPOINT_START,
-    USERS_GETPOINTS_FAILURE,
-    USERS_GETPOINTS_SUCCESS,
-    USERS_LOGIN_FAILURE,
+    UserPanelState,
     USERS_LOGIN_REQUEST,
     USERS_LOGIN_SUCCESS,
+    USERS_LOGIN_FAILURE,
     USERS_LOGOUT,
-    UserPanelState,
+    USERS_REGISTRATION_REQUEST,
+    USERS_REGISTRATION_SUCCESS,
+    USERS_REGISTRATION_FAILURE,
+    USERS_ADDNEWPOINT_START,
+    USERS_ADDNEWPOINT_END,
+    USERS_ADDNEWPOINT_REQUEST,
+    USERS_ADDNEWPOINT_SUCCESS,
+    USERS_ADDNEWPOINT_FAILURE,
+    USERS_GETPOINTS_SUCCESS,
+    USERS_GETPOINTS_FAILURE,
     UsersTypes
 } from "./types";
 
@@ -26,25 +32,15 @@ const defaultPoints = [
     { nodeId: '265513353',  name: 'Парк Победы' }
 ];
 
-let initialState: UserPanelState = {
+const initialState: UserPanelState = {
     addingNewPoint: false,
+    selectingPointOnMap: false,
     loggingIn: false,
     loggedIn: false,
+    registering: false,
     points: defaultPoints,
     user: { username: '', token: '' }
 };
-
-const storedUser = localStorage.getItem('user');
-if (storedUser) {
-    const user = JSON.parse(storedUser);
-    initialState = {
-        addingNewPoint: false,
-        loggingIn: false,
-        loggedIn: true,
-        points: [],
-        user: user
-    };
-}
 
 export function usersReducer(
     state = initialState,
@@ -54,7 +50,6 @@ export function usersReducer(
         case USERS_LOGIN_REQUEST:
             return update(state, {
                 loggingIn: { $set: true },
-                user: { $set: action.user }
             });
         case USERS_LOGIN_SUCCESS:
             return update(state, {
@@ -75,11 +70,35 @@ export function usersReducer(
                 points: { $set: defaultPoints },
                 user: { $set: { username: '', token: ''} }
             });
+        case USERS_REGISTRATION_REQUEST:
+            return update(state, {
+                registering: { $set: true },
+            });
+        case USERS_REGISTRATION_SUCCESS:
+            return update(state, {
+                registering: { $set: false },
+            });
+        case USERS_REGISTRATION_FAILURE:
+            return update(state, {
+                registering: { $set: false },
+            });
         case USERS_ADDNEWPOINT_START:
+            return update(state, {
+                selectingPointOnMap: { $set: true },
+            });
+        case USERS_ADDNEWPOINT_END:
+            return update(state, {
+                selectingPointOnMap: { $set: false },
+            });
+        case USERS_ADDNEWPOINT_REQUEST:
             return update(state, {
                 addingNewPoint: { $set: true},
             });
-        case USERS_ADDNEWPOINT_END:
+        case USERS_ADDNEWPOINT_SUCCESS:
+            return update(state, {
+                addingNewPoint: { $set: false },
+            });
+        case USERS_ADDNEWPOINT_FAILURE:
             return update(state, {
                 addingNewPoint: { $set: false },
             });

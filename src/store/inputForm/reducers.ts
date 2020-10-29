@@ -5,15 +5,13 @@ import {
     InputFormTypes,
     SET_ALGORITHM,
     SET_END_POINT,
-    SET_PATH_LENGTH,
     SET_START_POINT
 } from "./types";
 
 const initialState: InputFormState = {
-    startPoint: '1788932701',
-    endPoint: '1788932701',
-    algorithm: 'aGreedy',
-    pathLength: '',
+    startPoint: '',
+    endPoint: '',
+    algorithm: '',
 };
 
 export function inputFormReducer(
@@ -32,10 +30,6 @@ export function inputFormReducer(
         case SET_ALGORITHM:
             return update(state, {
                 algorithm: { $set: action.algorithm }
-            });
-        case SET_PATH_LENGTH:
-            return update(state, {
-                pathLength: { $set: action.pathLength }
             });
         default:
             return state;
