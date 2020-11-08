@@ -1,0 +1,42 @@
+$success-color: #28a745;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
+
+%alert {
+    width: 100%;
+    padding: .375rem .75rem;
+    margin: 0.5rem 0;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.success {
+    @extend %alert;
+
+    color: #fff;
+    background-color: $success-color;
+    border-color: $success-color;
+}
+
+.warning {
+    @extend %alert;
+
+    color: #212529;
+    background-color: $warning-color;
+    border-color: $warning-color;
+}
+
+.danger {
+    @extend %alert;
+
+    color: #fff;
+    background-color: $danger-color;
+    border-color: $danger-color;
+}
+
+@media screen and (min-width: 992px) {
+    %alert {
+        width: initial;
+        margin: 0 0 0 0.5rem;
+    }
+}

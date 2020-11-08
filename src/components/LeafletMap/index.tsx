@@ -4,7 +4,7 @@ import L from 'leaflet';
 import G, {Graph, Node} from 'ngraph.graph';
 import {aStar, aGreedy, nba, PathFinder}  from 'ngraph.path';
 
-import './style.css';
+import './style.scss';
 
 import kirovRoads from '../../assets/kirov-roads.json';
 import {addNewPoint} from "../../store/users/actions";

@@ -5,7 +5,7 @@ import {alertError} from "../../store/alerts/actions";
 import {login, registration} from "../../store/users/actions";
 import {AppState} from "../../store";
 
-import './style.css';
+import './style.scss';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');

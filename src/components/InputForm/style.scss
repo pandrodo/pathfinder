@@ -1,3 +1,5 @@
+@import "src/styles/shared";
+
 .input-form {
     display: flex;
     flex-flow: column;
@@ -15,23 +17,22 @@
 }
 
 .input-form__select {
-    width: 100%;
-    padding: .375rem 1.75rem .375rem .75rem;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
+    @extend %input;
 }
 
 @media screen and (min-width: 992px) {
     .input-form {
-        flex-flow: row wrap;
+        flex-flow: row;
+        margin-right: auto;
+        width: 40%;
     }
 
     .input-form__item {
-        width: calc(33.33% - .34rem);
+        width: calc((100% - 1rem)/3);
         margin: 0 0.5rem 0 0;
-    }
 
-    .input-form__item:last-of-type {
-        margin: 0;
+        &:last-of-type {
+            margin: 0;
+        }
     }
 }

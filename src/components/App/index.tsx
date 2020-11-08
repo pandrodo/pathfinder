@@ -9,7 +9,7 @@ import LeafletMap from "../LeafletMap";
 import { AppState } from "../../store";
 import {loginSuccess} from "../../store/users/actions";
 
-import './style.css';
+import './style.scss';
 
 const App = () => {
     const loggedIn = useSelector((state: AppState) => state.userPanel.loggedIn);
@@ -29,10 +29,10 @@ const App = () => {
         <div className='application'>
             <div className='control-panel'>
                 <InputForm />
-                <div className='user-panel'>
+                {/*<div className='user-panel'>*/}
                     { alert.message ? <Alert /> : null }
                     { loggedIn ? <NewPointForm /> : <LoginForm /> }
-                </div>
+                {/*</div>*/}
             </div>
             <LeafletMap />
         </div>

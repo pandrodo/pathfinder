@@ -1,0 +1,18 @@
+$button-color: #343a40;
+
+%button {
+    width: 100%;
+    padding: .375rem .75rem;
+    border: 1px solid $button-color;
+    border-radius: .25rem;
+    background-color: $button-color;
+    color: #fff;
+    cursor: pointer;
+}
+
+%input {
+    width: 100%;
+    padding: .375rem .75rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}

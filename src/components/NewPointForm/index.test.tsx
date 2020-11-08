@@ -33,7 +33,7 @@ describe("The NewPointForm", () => {
             </Provider>
         );
 
-        const addNewPointButton = screen.getByRole('button', {name: 'Добавить новую точку'});
+        const addNewPointButton = screen.getByRole('button', {name: 'Новая точка'});
         expect(addNewPointButton).toBeInTheDocument();
     });
 
@@ -47,13 +47,13 @@ describe("The NewPointForm", () => {
             </Provider>
         );
 
-        const addNewPointButton = screen.getByRole('button', {name: 'Добавить новую точку'});
+        const addNewPointButton = screen.getByRole('button', {name: 'Новая точка'});
 
         userEvent.click(addNewPointButton);
-        expect(addNewPointButton).toHaveValue('Остановить выбор точки');
+        expect(addNewPointButton).toHaveValue('Назад');
 
         userEvent.click(addNewPointButton);
-        expect(addNewPointButton).toHaveValue('Добавить новую точку');
+        expect(addNewPointButton).toHaveValue('Новая точка');
     });
 
     it("dispatches get points action on mounting", () => {

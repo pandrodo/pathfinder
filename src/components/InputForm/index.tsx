@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setStartPoint, setEndPoint, setAlgorithm} from "../../store/inputForm/actions";
 import {AppState} from "../../store";
 
-import './style.css';
+import './style.scss';
 
 const InputForm = () => {
     const [pathfinderOptions, setPathfinderOptions] = useState<JSX.Element[]>([]);

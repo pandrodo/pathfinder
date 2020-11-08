@@ -3,10 +3,12 @@
     flex-flow: column;
     height: 100vh;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
 
-.application > *:last-child {
-    flex-grow: 1;
+    > div {
+        &:last-of-type {
+            flex-grow: 1;
+        }
+    }
 }
 
 .control-panel {
@@ -15,21 +17,13 @@
     margin: .5rem .5rem 1rem;
 }
 
-.user-panel {
-    display: flex;
-    flex-flow: column;
-    margin: 0;
-}
-
 @media screen and (min-width: 992px) {
     .control-panel {
         flex-flow: row;
         justify-content: space-between;
-    }
 
-    .user-panel {
-        flex-flow: row;
-        align-items: flex-end;
-        margin: 0 0 0 0.5rem;
+        > div {
+          align-self: flex-end;
+        }
     }
 }

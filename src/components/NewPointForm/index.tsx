@@ -6,7 +6,7 @@ import {alertClear, alertWarning} from "../../store/alerts/actions";
 import {addNewPointStart, addNewPointEnd, getPoints} from "../../store/users/actions";
 import {AppState} from "../../store";
 
-import './style.css';
+import './style.scss';
 
 const NewPointForm = () => {
     const userName = useSelector((state: AppState) => state.userPanel.user.username);
@@ -38,7 +38,7 @@ const NewPointForm = () => {
         >
             <input className='new-point-form__button'
                    type='button'
-                   value={ selectingPointOnMap ? "Остановить выбор точки" : "Добавить новую точку" }
+                   value={ selectingPointOnMap ? "Назад" : "Новая точка" }
                    disabled={addingNewPoint}
                    onClick={handleAddNewPointButton}
             />
