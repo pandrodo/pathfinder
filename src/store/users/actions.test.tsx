@@ -19,10 +19,8 @@ describe("The users action", () => {
         name: string
     }
 
-    const API = 'http://192.168.1.39:3000';
-
     const server = setupServer(
-        rest.post(`${API}/loginUser`,(req, res, ctx) => {
+        rest.post('/loginUser',(req, res, ctx) => {
             if (req && req.body) {
                 const {username, password} = req.body as UserCredentials;
 
@@ -51,7 +49,7 @@ describe("The users action", () => {
                 })
             );
         }),
-        rest.post(`${API}/registerUser`, (req, res, ctx) => {
+        rest.post('/registerUser', (req, res, ctx) => {
             if (req && req.body) {
                 const {username, password} = req.body as UserCredentials;
 
@@ -70,7 +68,7 @@ describe("The users action", () => {
                 })
             );
         }),
-        rest.post(`${API}/addUserPoint`, (req, res, ctx) => {
+        rest.post('/addUserPoint', (req, res, ctx) => {
             if (req && req.body && req.headers) {
                 const {username, nodeId, name} = req.body as NewPoint;
                 const authorizationToken = req.headers.get('x-access-token');
@@ -87,7 +85,7 @@ describe("The users action", () => {
                 ctx.json({message: 'Error'})
             );
         }),
-        rest.post(`${API}/getUserPoints`, (req, res, ctx) => {
+        rest.post('/getUserPoints', (req, res, ctx) => {
             if (req && req.body) {
                 const {username} = req.body as {username: string};
 

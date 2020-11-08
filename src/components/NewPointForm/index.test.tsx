@@ -13,10 +13,8 @@ import * as userActions from "../../store/users/actions";
 import {addNewPointFailure, addNewPointRequest, loginSuccess} from "../../store/users/actions";
 
 describe("The NewPointForm", () => {
-    const API = 'http://192.168.1.39:3000';
-
     const server = setupServer(
-        rest.post(`${API}/getUserPoints`,(req, res, ctx) => {
+        rest.post('/getUserPoints',(req, res, ctx) => {
             return res(ctx.status(200));
         }),
     );

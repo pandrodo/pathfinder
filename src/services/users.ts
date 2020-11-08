@@ -1,7 +1,5 @@
 import {authHeader} from "../helpers/authHeader";
 
-const API = 'http://192.168.1.39:3000';
-
 export function loginUser(username: string, password: string) {
     const headers = {'Content-type': 'application/json'};
 
@@ -11,7 +9,7 @@ export function loginUser(username: string, password: string) {
         body: JSON.stringify({username: username, password: password})
     };
 
-    return fetch(`${API}/loginUser`, requestOptions)
+    return fetch('/loginUser', requestOptions)
         .then(handleResponse)
         .then(response => {
             localStorage.setItem('user', JSON.stringify(response.user));
@@ -34,7 +32,7 @@ export function registrationUser(username: string, password: string) {
         body: JSON.stringify({username: username, password: password})
     };
 
-    return fetch(`${API}/registerUser`, requestOptions)
+    return fetch('/registerUser', requestOptions)
         .then(handleResponse)
         .catch(error => {
             throw(error.message);
@@ -52,7 +50,7 @@ export function addNewUserPoint(username: string, nodeId: string, name: string) 
         body: JSON.stringify({username: username, nodeId: nodeId, name: name})
     };
 
-    return fetch(`${API}/addUserPoint`, requestOptions)
+    return fetch('/addUserPoint', requestOptions)
         .then(handleResponse)
         .catch(error => {
             throw(error.message);
@@ -69,7 +67,7 @@ export function getUserPoints(username: string) {
         body: JSON.stringify({username: username})
     };
 
-    return fetch(`${API}/getUserPoints`, requestOptions)
+    return fetch('/getUserPoints', requestOptions)
         .then(handleResponse)
         .catch(error => {
             throw(error.message);

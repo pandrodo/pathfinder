@@ -11,7 +11,6 @@
       <change beforePath="$PROJECT_DIR$/src/services/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/users.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/users/actions.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/users/actions.test.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/users/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/users/actions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +72,7 @@
       <recent name="D:\Work\WebstormProjects\pathfinder\src\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.npm start">
+  <component name="RunManager" selected="npm.test">
     <configuration name="The InputForm component" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -161,9 +160,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.test" />
+        <item itemvalue="Jest.The users action" />
         <item itemvalue="Jest.The users reducer" />
         <item itemvalue="Jest.The InputForm component" />
-        <item itemvalue="Jest.The users action" />
         <item itemvalue="Jest.The LoginForm" />
       </list>
     </recent_temporary>
@@ -268,7 +267,7 @@
       <workItem from="1604314901412" duration="8404000" />
       <workItem from="1604405763017" duration="5693000" />
       <workItem from="1604581436310" duration="7252000" />
-      <workItem from="1604848038039" duration="9687000" />
+      <workItem from="1604848038039" duration="14519000" />
     </task>
     <servers />
   </component>
@@ -321,26 +320,26 @@
     </state>
     <state x="-1125" y="356" key="FileChooserDialogImpl/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1599132242883" />
     <state x="1060" y="475" key="FileChooserDialogImpl/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604407168071" />
-    <state width="2539" height="511" key="GridCell.Tab.0.bottom" timestamp="1604857844992">
+    <state width="2539" height="511" key="GridCell.Tab.0.bottom" timestamp="1604865809559">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1899" height="405" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1603822724971" />
-    <state width="2539" height="511" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604857844992" />
-    <state width="2539" height="511" key="GridCell.Tab.0.center" timestamp="1604857844991">
+    <state width="2539" height="511" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604865809559" />
+    <state width="2539" height="511" key="GridCell.Tab.0.center" timestamp="1604865809559">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1899" height="405" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1603822724971" />
-    <state width="2539" height="511" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604857844991" />
-    <state width="2539" height="511" key="GridCell.Tab.0.left" timestamp="1604857844991">
+    <state width="2539" height="511" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604865809559" />
+    <state width="2539" height="511" key="GridCell.Tab.0.left" timestamp="1604865809559">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1899" height="405" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1603822724971" />
-    <state width="2539" height="511" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604857844991" />
-    <state width="2539" height="511" key="GridCell.Tab.0.right" timestamp="1604857844992">
+    <state width="2539" height="511" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604865809559" />
+    <state width="2539" height="511" key="GridCell.Tab.0.right" timestamp="1604865809559">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1899" height="405" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1603822724971" />
-    <state width="2539" height="511" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604857844992" />
+    <state width="2539" height="511" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604865809559" />
     <state width="2539" height="388" key="GridCell.Tab.1.bottom" timestamp="1603910242616">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
