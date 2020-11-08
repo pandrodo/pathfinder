@@ -2,23 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72ed801f-6b12-4718-91bb-d3052c53f091" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/styles/shared.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Alert/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Alert/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Alert/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Alert/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/InputForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InputForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/InputForm/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InputForm/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LeafletMap/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LeafletMap/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LeafletMap/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LeafletMap/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginForm/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginForm/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App/index.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/index.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LeafletMap/index.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LeafletMap/index.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LoginForm/index.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginForm/index.test.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/NewPointForm/index.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewPointForm/index.test.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewPointForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewPointForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewPointForm/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewPointForm/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/users.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/users/actions.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/users/actions.test.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/users/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/users/actions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,57 +74,55 @@
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
-    <configuration name="The LeafletMap" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="The InputForm component" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/src/components/LeafletMap/index.test.tsx" />
+      <test-file value="$PROJECT_DIR$/src/components/InputForm/index.test.tsx" />
       <test-names>
-        <test-name value="The LeafletMap" />
+        <test-name value="The InputForm component" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="The LeafletMap.dispatches no action after prompt if prompt return empty string" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/components/LeafletMap/index.test.tsx" />
-      <test-names>
-        <test-name value="The LeafletMap" />
-        <test-name value="dispatches no action after prompt if prompt return empty string" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="The LeafletMap.shows nothing if route has not been calculated" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/components/LeafletMap/index.test.tsx" />
-      <test-names>
-        <test-name value="The LeafletMap" />
-        <test-name value="shows nothing if route has not been calculated" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="The NewPointForm" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="The LoginForm" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/src/components/NewPointForm/index.test.tsx" />
+      <test-file value="$PROJECT_DIR$/src/components/LoginForm/index.test.tsx" />
       <test-names>
-        <test-name value="The NewPointForm" />
+        <test-name value="The LoginForm" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="The users action" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/store/users/actions.test.tsx" />
+      <test-names>
+        <test-name value="The users action" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="The users reducer" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/store/users/reducers.test.tsx" />
+      <test-names>
+        <test-name value="The users reducer" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -161,20 +151,20 @@
     </configuration>
     <list>
       <item itemvalue="JavaScript Debug.Debug Application" />
-      <item itemvalue="Jest.The LeafletMap" />
-      <item itemvalue="Jest.The LeafletMap.shows nothing if route has not been calculated" />
-      <item itemvalue="Jest.The LeafletMap.dispatches no action after prompt if prompt return empty string" />
-      <item itemvalue="Jest.The NewPointForm" />
       <item itemvalue="npm.npm start" />
+      <item itemvalue="Jest.The LoginForm" />
+      <item itemvalue="Jest.The users action" />
       <item itemvalue="npm.test" />
+      <item itemvalue="Jest.The InputForm component" />
+      <item itemvalue="Jest.The users reducer" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.The NewPointForm" />
         <item itemvalue="npm.test" />
-        <item itemvalue="Jest.The LeafletMap" />
-        <item itemvalue="Jest.The LeafletMap.shows nothing if route has not been calculated" />
-        <item itemvalue="Jest.The LeafletMap.dispatches no action after prompt if prompt return empty string" />
+        <item itemvalue="Jest.The users reducer" />
+        <item itemvalue="Jest.The InputForm component" />
+        <item itemvalue="Jest.The users action" />
+        <item itemvalue="Jest.The LoginForm" />
       </list>
     </recent_temporary>
   </component>
@@ -278,7 +268,7 @@
       <workItem from="1604314901412" duration="8404000" />
       <workItem from="1604405763017" duration="5693000" />
       <workItem from="1604581436310" duration="7252000" />
-      <workItem from="1604848038039" duration="1529000" />
+      <workItem from="1604848038039" duration="9687000" />
     </task>
     <servers />
   </component>
@@ -331,26 +321,26 @@
     </state>
     <state x="-1125" y="356" key="FileChooserDialogImpl/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1599132242883" />
     <state x="1060" y="475" key="FileChooserDialogImpl/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604407168071" />
-    <state width="2539" height="362" key="GridCell.Tab.0.bottom" timestamp="1604593452086">
+    <state width="2539" height="511" key="GridCell.Tab.0.bottom" timestamp="1604857844992">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1899" height="405" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1603822724971" />
-    <state width="2539" height="362" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604593452086" />
-    <state width="2539" height="362" key="GridCell.Tab.0.center" timestamp="1604593452086">
+    <state width="2539" height="511" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604857844992" />
+    <state width="2539" height="511" key="GridCell.Tab.0.center" timestamp="1604857844991">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1899" height="405" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1603822724971" />
-    <state width="2539" height="362" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604593452086" />
-    <state width="2539" height="362" key="GridCell.Tab.0.left" timestamp="1604593452085">
+    <state width="2539" height="511" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604857844991" />
+    <state width="2539" height="511" key="GridCell.Tab.0.left" timestamp="1604857844991">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1899" height="405" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1603822724971" />
-    <state width="2539" height="362" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604593452085" />
-    <state width="2539" height="362" key="GridCell.Tab.0.right" timestamp="1604593452086">
+    <state width="2539" height="511" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604857844991" />
+    <state width="2539" height="511" key="GridCell.Tab.0.right" timestamp="1604857844992">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="1899" height="405" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1603822724971" />
-    <state width="2539" height="362" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604593452086" />
+    <state width="2539" height="511" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.0.1920.1080@0.0.2560.1440" timestamp="1604857844992" />
     <state width="2539" height="388" key="GridCell.Tab.1.bottom" timestamp="1603910242616">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>

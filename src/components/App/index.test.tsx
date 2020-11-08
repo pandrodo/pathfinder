@@ -11,8 +11,10 @@ import {alertError} from "../../store/alerts/actions";
 import App from "./index";
 
 describe("The App component", () => {
+    const API = 'http://192.168.1.39:3000';
+
     const server = setupServer(
-        rest.post('http://127.0.0.1:3000/getUserPoints',(req, res, ctx) => {
+        rest.post(`${API}/getUserPoints`,(req, res, ctx) => {
             return res(ctx.status(200));
         }),
     );

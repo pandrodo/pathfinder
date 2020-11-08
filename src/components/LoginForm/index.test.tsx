@@ -13,11 +13,13 @@ import * as alertActions from "../../store/alerts/actions";
 import * as userActions from "../../store/users/actions";
 
 describe("The LoginForm", () => {
+    const API = 'http://192.168.1.39:3000';
+
     const server = setupServer(
-        rest.post('http://127.0.0.1:3000/loginUser',(req, res, ctx) => {
+        rest.post(`${API}/loginUser`,(req, res, ctx) => {
             return res(ctx.status(200));
         }),
-        rest.post('http://127.0.0.1:3000/registerUser', (req, res, ctx) => {
+        rest.post(`${API}/registerUser`, (req, res, ctx) => {
             return res(ctx.status(200));
         }),
     );

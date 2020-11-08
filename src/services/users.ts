@@ -1,20 +1,25 @@
-import { authHeader } from "../helpers/authHeader";
+import {authHeader} from "../helpers/authHeader";
+
+const API = 'http://192.168.1.39:3000';
 
 export function loginUser(username: string, password: string) {
-    const headers = { 'Content-type': 'application/json' };
+    const headers = {'Content-type': 'application/json'};
 
     const requestOptions = {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify({ username: username, password: password})
+        body: JSON.stringify({username: username, password: password})
     };
 
-    return fetch('http://127.0.0.1:3000/loginUser', requestOptions)
+    return fetch(`${API}/loginUser`, requestOptions)
         .then(handleResponse)
         .then(response => {
             localStorage.setItem('user', JSON.stringify(response.user));
 
             return response;
+        })
+        .catch(error => {
+            throw(error.message);
         });
 }
 
@@ -25,40 +30,50 @@ export function logoutUser() {
 export function registrationUser(username: string, password: string) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ username: username, password: password})
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify({username: username, password: password})
     };
 
-    return fetch('http://127.0.0.1:3000/registerUser', requestOptions)
-        .then(handleResponse);
+    return fetch(`${API}/registerUser`, requestOptions)
+        .then(handleResponse)
+        .catch(error => {
+            throw(error.message);
+        });
+
 }
 
 export function addNewUserPoint(username: string, nodeId: string, name: string) {
-    const headers = { 'Content-type': 'application/json' };
+    const headers = {'Content-type': 'application/json'};
     const tokenHeader = authHeader();
 
     const requestOptions = {
         method: 'POST',
         headers: tokenHeader ? Object.assign(headers, tokenHeader) : headers,
-        body: JSON.stringify({ username: username, nodeId: nodeId, name: name})
+        body: JSON.stringify({username: username, nodeId: nodeId, name: name})
     };
 
-    return fetch('http://127.0.0.1:3000/addUserPoint', requestOptions)
-        .then(handleResponse);
+    return fetch(`${API}/addUserPoint`, requestOptions)
+        .then(handleResponse)
+        .catch(error => {
+            throw(error.message);
+        });
 }
 
 export function getUserPoints(username: string) {
-    const headers = { 'Content-type': 'application/json' };
+    const headers = {'Content-type': 'application/json'};
     const tokenHeader = authHeader();
 
     const requestOptions = {
         method: 'POST',
         headers: tokenHeader ? Object.assign(headers, tokenHeader) : headers,
-        body: JSON.stringify({ username: username })
+        body: JSON.stringify({username: username})
     };
 
-    return fetch('http://127.0.0.1:3000/getUserPoints', requestOptions)
-        .then(handleResponse);
+    return fetch(`${API}/getUserPoints`, requestOptions)
+        .then(handleResponse)
+        .catch(error => {
+            throw(error.message);
+        });
 }
 
 function handleResponse(response: Response) {
@@ -70,7 +85,10 @@ function handleResponse(response: Response) {
                 logoutUser();
             }
 
-            const error = (data && data.message) || response.statusText;
+            const error: TypeError = {
+                name: 'Response error',
+                message: (data && data.message) || response.statusText
+            };
 
             return Promise.reject(error);
         }

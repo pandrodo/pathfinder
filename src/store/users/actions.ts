@@ -53,7 +53,7 @@ export const login = (username: string, password: string) => async (dispatch: Di
                 },
             error => {
                 dispatch(loginFailure());
-                dispatch(alertError(error.toString()));
+                dispatch(alertError(error));
                 }
         );
 };
@@ -99,7 +99,7 @@ export const registration = (username: string, password: string) => async (dispa
             },
             error => {
                 dispatch(registrationFailure());
-                dispatch(alertError(error.toString()));
+                dispatch(alertError(error));
             }
         );
 }
@@ -145,7 +145,7 @@ export const addNewPoint = (username: string, nodeId: string, name: string) => a
             },
             error => {
                 dispatch(addNewPointFailure());
-                dispatch(alertError(error.toString()));
+                dispatch(alertError(error));
             }
         );
 }
@@ -169,7 +169,7 @@ export const getPoints = (username: string) => async (dispatch: DispatchFunction
             points => dispatch(getPointsSuccess(points)),
             error => {
                 dispatch(getPointsFailure());
-                dispatch(alertError(error.toString()));
+                dispatch(alertError(error));
             }
         );
 }
