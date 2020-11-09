@@ -187,7 +187,7 @@ const LeafletMap = () => {
             }
             return false;
         });
-        const newPointName = prompt('Введите название для выбранной точки');
+        const newPointName = prompt('New point name');
         if (newPointName) {
             dispatch(addNewPoint(userName, currentNearestNode.id, newPointName));
         }

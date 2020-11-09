@@ -36,7 +36,7 @@ describe("The LoginForm", () => {
     afterAll(() => server.close());
 
     it("shows username input field and it changes component state on change", () => {
-        const usernameInputNode = screen.getByRole('textbox', {name: 'Логин'});
+        const usernameInputNode = screen.getByRole('textbox', {name: 'Username'});
         expect(usernameInputNode).toBeInTheDocument();
 
         userEvent.type(usernameInputNode, 'username');
@@ -44,7 +44,7 @@ describe("The LoginForm", () => {
     });
 
     it("shows password input field and it changes component state on change", () => {
-        const passwordInputNode = screen.getByLabelText('Пароль');
+        const passwordInputNode = screen.getByLabelText('Password');
         expect(passwordInputNode).toBeInTheDocument();
 
         userEvent.type(passwordInputNode, 'password');
@@ -52,9 +52,9 @@ describe("The LoginForm", () => {
     });
 
     it("login button dispatches login action with provided data", () => {
-        const usernameInputNode = screen.getByRole('textbox', {name: 'Логин'});
-        const passwordInputNode = screen.getByLabelText('Пароль');
-        const loginButtonNode = screen.getByRole('button', {name: 'Войти'});
+        const usernameInputNode = screen.getByRole('textbox', {name: 'Username'});
+        const passwordInputNode = screen.getByLabelText('Password');
+        const loginButtonNode = screen.getByRole('button', {name: 'Login'});
         const loggingUserSpy = jest.spyOn(userActions, 'login');
 
         userEvent.type(usernameInputNode, 'username');
@@ -65,9 +65,9 @@ describe("The LoginForm", () => {
     });
 
     it("registration button dispatches registration action with provided data",() => {
-        const usernameInputNode = screen.getByRole('textbox', {name: 'Логин'});
-        const passwordInputNode = screen.getByLabelText('Пароль');
-        const registrationButtonNode = screen.getByRole('button', {name: 'Регистрация'});
+        const usernameInputNode = screen.getByRole('textbox', {name: 'Username'});
+        const passwordInputNode = screen.getByLabelText('Password');
+        const registrationButtonNode = screen.getByRole('button', {name: 'Registration'});
         const registrationUserSpy = jest.spyOn(userActions, 'registration');
 
         userEvent.type(usernameInputNode, 'username');
@@ -78,9 +78,9 @@ describe("The LoginForm", () => {
     });
 
     it("button dispatches alert error action if username input field is empty", () => {
-        const usernameInputNode = screen.getByRole('textbox', {name: 'Логин'});
-        const passwordInputNode = screen.getByLabelText('Пароль');
-        const loginButtonNode = screen.getByRole('button', {name: 'Войти'});
+        const usernameInputNode = screen.getByRole('textbox', {name: 'Username'});
+        const passwordInputNode = screen.getByLabelText('Password');
+        const loginButtonNode = screen.getByRole('button', {name: 'Login'});
         const alertErrorSpy = jest.spyOn(alertActions, 'alertError');
 
         userEvent.type(usernameInputNode, '');
@@ -91,9 +91,9 @@ describe("The LoginForm", () => {
     });
 
     it("button dispatches alert error action if password input field is empty", () => {
-        const usernameInputNode = screen.getByRole('textbox', {name: 'Логин'});
-        const passwordInputNode = screen.getByLabelText('Пароль');
-        const loginButtonNode = screen.getByRole('button', {name: 'Войти'});
+        const usernameInputNode = screen.getByRole('textbox', {name: 'Username'});
+        const passwordInputNode = screen.getByLabelText('Password');
+        const loginButtonNode = screen.getByRole('button', {name: 'Login'});
         const alertErrorSpy = jest.spyOn(alertActions, 'alertError');
 
         userEvent.type(usernameInputNode, 'username');

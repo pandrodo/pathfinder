@@ -31,7 +31,7 @@ const LoginForm = () => {
         <div className='login-form' role='form' aria-label="Login Form">
             <div className='login-form__item'>
                 <label className='login-form__label'>
-                    Логин
+                    Username
                     <input className='login-form__input'
                            type='text'
                            name='username'
@@ -43,7 +43,7 @@ const LoginForm = () => {
             </div>
             <div className='login-form__item'>
                 <label className='login-form__label'>
-                    Пароль
+                    Password
                     <input className='login-form__input'
                            type='password'
                            name='password'
@@ -60,7 +60,7 @@ const LoginForm = () => {
                        disabled={loggingIn}
                        onClick={() => clickHandler(login)}
                 >
-                    Войти
+                    Login
                 </button>
             </div>
             <div className='login-form__item'>
@@ -70,7 +70,7 @@ const LoginForm = () => {
                        disabled={loggingIn}
                        onClick={() => clickHandler(registration)}
                 >
-                    Регистрация
+                    Registration
                 </button>
             </div>
         </div>

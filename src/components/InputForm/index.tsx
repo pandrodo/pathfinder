@@ -43,7 +43,7 @@ const InputForm = () => {
         <div className='input-form' role='form' aria-label="Input Form">
             <div className='input-form__item'>
                 <label className='input-form__label'>
-                    Начало
+                    Start
                     <select className='input-form__select'
                             value={inputForm.startPoint}
                             onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setStartPoint(event.target.value))}
@@ -54,7 +54,7 @@ const InputForm = () => {
             </div>
             <div className='input-form__item'>
                 <label className='input-form__label'>
-                    Конец
+                    End
                     <select className='input-form__select'
                             value={inputForm.endPoint}
                             onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setEndPoint(event.target.value))}
@@ -65,7 +65,7 @@ const InputForm = () => {
             </div>
             <div className='input-form__item'>
                 <label className='input-form__label'>
-                    Алгоритм
+                    Algorithm
                     <select className='input-form__select'
                             value={inputForm.algorithm}
                             onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAlgorithm(event.target.value))}

@@ -27,7 +27,7 @@ const NewPointForm = () => {
             dispatch(alertClear());
         } else {
             dispatch(addNewPointStart());
-            dispatch(alertWarning('Выберете точку на карте'));
+            dispatch(alertWarning('Click on map to add new point'));
         }
     }
 
@@ -38,13 +38,13 @@ const NewPointForm = () => {
         >
             <input className='new-point-form__button'
                    type='button'
-                   value={ selectingPointOnMap ? "Назад" : "Новая точка" }
+                   value={ selectingPointOnMap ? "Stop" : "New Point" }
                    disabled={addingNewPoint}
                    onClick={handleAddNewPointButton}
             />
             <input className='new-point-form__button'
                    type='button'
-                   value='Выйти'
+                   value='Logout'
                    onClick={() => dispatch(logout())}
             />
         </div>

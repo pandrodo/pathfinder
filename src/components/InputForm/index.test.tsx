@@ -20,7 +20,7 @@ describe("The InputForm component", () => {
             </Provider>
         );
 
-        const startPointSelectNode = screen.getByRole('combobox', {name: 'Начало'});
+        const startPointSelectNode = screen.getByRole('combobox', {name: 'Start'});
         expect(startPointSelectNode).toBeInTheDocument();
 
         const startPointOptionNode = screen.getAllByRole('option', {name: 'Вокзал'})[0] as HTMLOptionElement;
@@ -39,7 +39,7 @@ describe("The InputForm component", () => {
             </Provider>
         );
 
-        const endPointSelectNode = screen.getByRole('combobox', {name: 'Конец'});
+        const endPointSelectNode = screen.getByRole('combobox', {name: 'End'});
         expect(endPointSelectNode).toBeInTheDocument();
 
         const endPointOptionNode = screen.getAllByRole('option', {name: 'Вокзал'})[1] as HTMLOptionElement;
@@ -59,7 +59,7 @@ describe("The InputForm component", () => {
             </Provider>
         );
 
-        const algorithmPointSelectNode = screen.getByRole('combobox', {name: 'Алгоритм'});
+        const algorithmPointSelectNode = screen.getByRole('combobox', {name: 'Algorithm'});
         expect(algorithmPointSelectNode).toBeInTheDocument();
 
         const algorithmPointOptionNode = screen.getByRole('option', {name: 'aStar'}) as HTMLOptionElement;
@@ -78,8 +78,8 @@ describe("The InputForm component", () => {
             </Provider>
         );
 
-        const startPointSelectNode = screen.getByRole('combobox', {name: 'Начало'});
-        const endPointSelectNode = screen.getByRole('combobox', {name: 'Конец'});
+        const startPointSelectNode = screen.getByRole('combobox', {name: 'Start'});
+        const endPointSelectNode = screen.getByRole('combobox', {name: 'End'});
 
         store.dispatch(getPointsSuccess([{nodeId: '1', name: 'Point 1'}, {nodeId: '2', name: 'Points 2'}]));
 
@@ -100,8 +100,8 @@ describe("The InputForm component", () => {
 
         store.dispatch(getPointsSuccess([]));
 
-        const startPointSelectNode = screen.getByRole('combobox', {name: 'Начало'});
-        const endPointSelectNode = screen.getByRole('combobox', {name: 'Конец'});
+        const startPointSelectNode = screen.getByRole('combobox', {name: 'Start'});
+        const endPointSelectNode = screen.getByRole('combobox', {name: 'End'});
 
         await waitFor(() => {
             expect(startPointSelectNode).toHaveValue('1788932701');

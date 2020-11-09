@@ -33,7 +33,7 @@ describe("The NewPointForm", () => {
             </Provider>
         );
 
-        const addNewPointButton = screen.getByRole('button', {name: 'Новая точка'});
+        const addNewPointButton = screen.getByRole('button', {name: 'New Point'});
         expect(addNewPointButton).toBeInTheDocument();
     });
 
@@ -47,13 +47,13 @@ describe("The NewPointForm", () => {
             </Provider>
         );
 
-        const addNewPointButton = screen.getByRole('button', {name: 'Новая точка'});
+        const addNewPointButton = screen.getByRole('button', {name: 'New Point'});
 
         userEvent.click(addNewPointButton);
-        expect(addNewPointButton).toHaveValue('Назад');
+        expect(addNewPointButton).toHaveValue('Stop');
 
         userEvent.click(addNewPointButton);
-        expect(addNewPointButton).toHaveValue('Новая точка');
+        expect(addNewPointButton).toHaveValue('New Point');
     });
 
     it("dispatches get points action on mounting", () => {
@@ -101,7 +101,7 @@ describe("The NewPointForm", () => {
             </Provider>
         );
 
-        const logoutButton = screen.getByRole('button', {name: 'Выйти'});
+        const logoutButton = screen.getByRole('button', {name: 'Logout'});
         const logoutSpy = jest.spyOn(userActions, "logout");
         userEvent.click(logoutButton);
 
