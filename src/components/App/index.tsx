@@ -29,10 +29,8 @@ const App = () => {
         <div className='application'>
             <div className='control-panel'>
                 <InputForm />
-                {/*<div className='user-panel'>*/}
-                    { alert.message ? <Alert /> : null }
-                    { loggedIn ? <NewPointForm /> : <LoginForm /> }
-                {/*</div>*/}
+                { alert.message ? <Alert /> : null }
+                { loggedIn ? <NewPointForm /> : <LoginForm /> }
             </div>
             <LeafletMap />
         </div>

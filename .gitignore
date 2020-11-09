@@ -13,6 +13,9 @@
 # ide
 /.idea
 
+# react dev server
+react-app-env.d.ts
+
 # misc
 .DS_Store
 .env.local
