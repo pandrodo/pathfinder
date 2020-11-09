@@ -1,6 +1,7 @@
 # Pathfinder
 
-React application that uses various algorithms (such as Dijkstra, A*, nba) for shortest path search.
+React Redux application that uses various algorithms (such as Dijkstra, A*, nba) for shortest path search. Written in
+TypeScript.
 
 ## Map
 
@@ -22,7 +23,7 @@ way["highway"~"motorway|motorway_link|trunk|trunk_link|primary|primary_link|seco
 out skel;
 ```
 
-## Algorithm realization
+## Algorithms
 
 [ngraph.path](https://github.com/anvaka/ngraph.path) is a light and fast library that provides Dijkstra, A* and nba 
 algorithms for solving the shortest path problem in graphs.
