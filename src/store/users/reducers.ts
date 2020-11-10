@@ -20,16 +20,11 @@ import {
 } from "./types";
 
 const defaultPoints = [
-    { nodeId: '1788932701', name: 'Дерево желаний' },
-    { nodeId: '582469522',  name: 'Музей Васнецовых' },
-    { nodeId: '135322595',  name: 'Филармония' },
-    { nodeId: '2715644743', name: 'Вокзал' },
-    { nodeId: '265513434',  name: 'Факел' },
-    { nodeId: '277945806',  name: 'Дружба' },
-    { nodeId: '1832176667', name: 'Кочуровский парк' },
-    { nodeId: '4076342498', name: 'Зональный институт' },
-    { nodeId: '1787337924', name: 'Диорама' },
-    { nodeId: '265513353',  name: 'Парк Победы' }
+    {nodeId: '2572156610', name: 'Drama theatre'},
+    {nodeId: '5269608776', name: 'Circus'},
+    {nodeId: '3708439426', name: 'Vasnetsov art museum'},
+    {nodeId: '1345594583', name: 'Alexander garden'},
+    {nodeId: '1350861918', name: 'Philharmonie'},
 ];
 
 const initialState: UserPanelState = {

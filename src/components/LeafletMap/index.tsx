@@ -7,7 +7,7 @@ import {aStar, aGreedy, nba, PathFinder}  from 'ngraph.path';
 import './style.scss';
 
 import kirovRoads from '../../assets/kirov-roads.json';
-import {addNewPoint} from "../../store/users/actions";
+import {addNewPoint, addNewPointEnd} from "../../store/users/actions";
 import {setAvailablePathfinders} from "../../store/map/actions";
 import {AppState} from "../../store";
 
@@ -190,6 +190,7 @@ const LeafletMap = () => {
         const newPointName = prompt('New point name');
         if (newPointName) {
             dispatch(addNewPoint(userName, currentNearestNode.id, newPointName));
+            dispatch(addNewPointEnd());
         }
     }, [dispatch, graph, userName]);
 
