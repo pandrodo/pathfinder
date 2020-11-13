@@ -1,7 +1,7 @@
 # Pathfinder
 
 React Redux application that uses various algorithms (such as Dijkstra, A*, nba) for shortest path search. Written in
-TypeScript.
+TypeScript. Just check [demo](https://pathfinder-demo-80702.herokuapp.com/).
 
 ## Map
 
