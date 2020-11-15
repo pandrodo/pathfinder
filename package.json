@@ -33,6 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "rd /s /q ..\\pathfinder-demo\\pathfinder && md ..\\pathfinder-demo\\pathfinder && Xcopy /e /i build ..\\pathfinder-demo\\pathfinder && aws s3 rm --recursive s3://pathfinder-demo/build && aws s3 cp --recursive build s3://pathfinder-demo/build",
     "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject"
   },
