@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {setStartPoint, setEndPoint, setAlgorithm} from "../../store/inputForm/actions";
 import {AppState} from "../../store";
 
+import inputIcon from "../../assets/input.svg";
+
 import './style.scss';
 
 const InputForm = () => {
@@ -40,40 +42,35 @@ const InputForm = () => {
     }, [dispatch, points]);
 
     return (
-        <div className='input-form' role='form' aria-label="Input Form">
-            <div className='input-form__item'>
-                <label className='input-form__label'>
-                    Start
-                    <select className='input-form__select'
-                            value={inputForm.startPoint}
-                            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setStartPoint(event.target.value))}
-                    >
-                        {pointOptions}
-                    </select>
-                </label>
+        <div className='path-panel'>
+            <div className='path-panel__button'>
+                <img src={inputIcon} alt='Input' width='36' height='36'/>
             </div>
-            <div className='input-form__item'>
-                <label className='input-form__label'>
-                    End
-                    <select className='input-form__select'
-                            value={inputForm.endPoint}
-                            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setEndPoint(event.target.value))}
-                    >
-                        {pointOptions}
-                    </select>
-                </label>
+            <div className='path-panel__form' role='form' aria-label="Input Form">
+                <select className='path-panel__select'
+                        value={inputForm.startPoint}
+                        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setStartPoint(event.target.value))}
+                >
+                    {pointOptions}
+                </select>
+                <select className='path-panel__select'
+                        value={inputForm.endPoint}
+                        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setEndPoint(event.target.value))}
+                >
+                    {pointOptions}
+                </select>
             </div>
-            <div className='input-form__item'>
-                <label className='input-form__label'>
-                    Algorithm
-                    <select className='input-form__select'
-                            value={inputForm.algorithm}
-                            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAlgorithm(event.target.value))}
-                    >
-                        {pathfinderOptions}
-                    </select>
-                </label>
-            </div>
+                {/*<div className='input-form__item'>*/}
+                {/*    <label className='input-form__label'>*/}
+                {/*        Algorithm*/}
+                {/*        <select className='input-form__select'*/}
+                {/*                value={inputForm.algorithm}*/}
+                {/*                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAlgorithm(event.target.value))}*/}
+                {/*        >*/}
+                {/*            {pathfinderOptions}*/}
+                {/*        </select>*/}
+                {/*    </label>*/}
+                {/*</div>*/}
         </div>
     );
 }

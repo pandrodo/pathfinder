@@ -1,0 +1,44 @@
+.button-icon {
+    display: block;
+}
+
+//@import "src/styles/shared";
+//
+//.new-point-form {
+//    display: flex;
+//    flex-flow: column;
+//    margin: 0;
+//}
+//
+//.new-point-form__button {
+//    @extend %button;
+//
+//    margin: 0.5rem 0 0.5rem;
+//
+//    &:last-of-type {
+//        margin: 0.5rem 0 0;
+//    }
+//}
+//
+//@media screen and (min-width: 992px) {
+//    .new-point-form {
+//        flex-flow: row;
+//        align-items: flex-end;
+//        margin: 0 0 0 0.5rem;
+//        width: 20%;
+//    }
+//
+//    .new-point-form__button {
+//        min-width: 0;
+//        width: calc(50% - 0.25rem);
+//        margin: 0 0 0 0.5rem;
+//
+//        &:first-of-type {
+//            margin: 0;
+//        }
+//
+//        &:last-of-type {
+//            margin: 0 0 0 0.5rem;
+//        }
+//    }
+//}

@@ -7,6 +7,7 @@ import {addNewPointStart, addNewPointEnd, getPoints} from "../../store/users/act
 import {AppState} from "../../store";
 
 import './style.scss';
+import newPointIcon from "../../assets/new-point__button.svg";
 
 const NewPointForm = () => {
     const userName = useSelector((state: AppState) => state.userPanel.user.username);
@@ -32,21 +33,28 @@ const NewPointForm = () => {
     }
 
     return (
-        <div className='new-point-form'
-             role='form'
-             aria-label="New Point Form"
-        >
-            <input className='new-point-form__button'
-                   type='button'
-                   value={ selectingPointOnMap ? "Stop" : "New Point" }
-                   disabled={addingNewPoint}
-                   onClick={handleAddNewPointButton}
-            />
-            <input className='new-point-form__button'
-                   type='button'
-                   value='Logout'
-                   onClick={() => dispatch(logout())}
-            />
+        <div className='new-point' >
+            <div className='new-point-__button'>
+                <img
+                    className='button-icon'
+                    src={newPointIcon}
+                    alt='New Point'
+                    width='36'
+                    height='36'
+                />
+            </div>
+
+            {/*<input className='new-point-form__button'*/}
+            {/*       type='button'*/}
+            {/*       value={ selectingPointOnMap ? "Stop" : "New Point" }*/}
+            {/*       disabled={addingNewPoint}*/}
+            {/*       onClick={handleAddNewPointButton}*/}
+            {/*/>*/}
+            {/*<input className='new-point-form__button'*/}
+            {/*       type='button'*/}
+            {/*       value='Logout'*/}
+            {/*       onClick={() => dispatch(logout())}*/}
+            {/*/>*/}
         </div>
     );
 }

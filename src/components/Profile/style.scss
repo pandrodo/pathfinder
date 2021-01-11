@@ -1,0 +1,84 @@
+.profile {
+    position: relative;
+}
+
+.profile__icon {
+    display: block;
+    cursor: pointer;
+}
+
+.profile__form {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    position: absolute;
+    top: calc(36px + .5rem);
+    right: calc(36px + .5rem);
+
+    height: calc(108px + 2rem);
+
+    background: white;
+    border-radius: 4px;
+    padding: .5rem;
+}
+
+.profile__input, .profile__button {
+    height: 36px;
+}
+
+//@import "src/styles/shared";
+//
+//.login-form {
+//    display: flex;
+//    flex-flow: column;
+//    margin: 0;
+//}
+//
+//.login-form__item {
+//    display: flex;
+//    flex-flow: column;
+//    margin: 0 0 0.5rem;
+//
+//    &:last-of-type {
+//        margin: 0;
+//    }
+//}
+//
+//.login-form__label {
+//    margin-bottom: 0;
+//    text-align: center;
+//}
+//
+//.login-form__input {
+//    @extend %input
+//}
+//
+//.login-form__button {
+//    @extend %button;
+//
+//    margin: .5rem 0 0 0;
+//}
+//
+//@media screen and (min-width: 992px) {
+//    .login-form {
+//        flex-flow: row;
+//        align-items: flex-end;
+//        margin: 0 0 0 0.5rem;
+//        width: 40%;
+//    }
+//
+//    .login-form__item {
+//        min-width: 0;
+//        width: calc(25% - .375rem);
+//        margin: 0 0 0 0.5rem;
+//
+//        &:first-of-type {
+//            margin: 0;
+//        }
+//
+//        &:last-of-type {
+//            margin: 0 0 0 0.5rem;
+//        }
+//    }
+//}
