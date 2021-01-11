@@ -2,20 +2,22 @@ import update from 'immutability-helper';
 
 import {
     UserPanelState,
+    USERS_ADDNEWPOINT_END,
+    USERS_ADDNEWPOINT_FAILURE,
+    USERS_ADDNEWPOINT_REQUEST,
+    USERS_ADDNEWPOINT_START,
+    USERS_ADDNEWPOINT_SUCCESS,
+    USERS_GETPOINTS_FAILURE,
+    USERS_GETPOINTS_SUCCESS,
+    USERS_LOGIN_FAILURE,
     USERS_LOGIN_REQUEST,
     USERS_LOGIN_SUCCESS,
-    USERS_LOGIN_FAILURE,
     USERS_LOGOUT,
+    USERS_REGISTRATION_FAILURE,
     USERS_REGISTRATION_REQUEST,
     USERS_REGISTRATION_SUCCESS,
-    USERS_REGISTRATION_FAILURE,
-    USERS_ADDNEWPOINT_START,
-    USERS_ADDNEWPOINT_END,
-    USERS_ADDNEWPOINT_REQUEST,
-    USERS_ADDNEWPOINT_SUCCESS,
-    USERS_ADDNEWPOINT_FAILURE,
-    USERS_GETPOINTS_SUCCESS,
-    USERS_GETPOINTS_FAILURE,
+    SET_ACTIVE_PANEL,
+    SET_THEME,
     UsersTypes
 } from "./types";
 
@@ -28,13 +30,15 @@ const defaultPoints = [
 ];
 
 const initialState: UserPanelState = {
+    activePanel: 'none',
     addingNewPoint: false,
     selectingPointOnMap: false,
     loggingIn: false,
     loggedIn: false,
     registering: false,
     points: defaultPoints,
-    user: { username: '', token: '' }
+    user: { username: '', token: '' },
+    theme: 'light'
 };
 
 export function usersReducer(
@@ -48,6 +52,7 @@ export function usersReducer(
             });
         case USERS_LOGIN_SUCCESS:
             return update(state, {
+                activePanel: { $set: 'none' },
                 loggingIn: { $set: false },
                 loggedIn: { $set: true },
                 user: { $set: action.user }
@@ -60,6 +65,7 @@ export function usersReducer(
             });
         case USERS_LOGOUT:
             return update(state, {
+                activePanel: { $set: 'none' },
                 loggingIn: { $set: false},
                 loggedIn: { $set: false},
                 points: { $set: defaultPoints },
@@ -71,6 +77,7 @@ export function usersReducer(
             });
         case USERS_REGISTRATION_SUCCESS:
             return update(state, {
+                activePanel: { $set: 'none' },
                 registering: { $set: false },
             });
         case USERS_REGISTRATION_FAILURE:
@@ -104,6 +111,14 @@ export function usersReducer(
         case USERS_GETPOINTS_FAILURE:
             return update(state, {
                 points: { $set: defaultPoints },
+            });
+        case SET_ACTIVE_PANEL:
+            return update(state, {
+                activePanel: { $set: action.panel },
+            });
+        case SET_THEME:
+            return update(state, {
+                theme: { $set: action.theme },
             });
         default:
             return state;

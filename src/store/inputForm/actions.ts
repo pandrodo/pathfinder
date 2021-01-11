@@ -1,13 +1,14 @@
 import {InputFormTypes, SET_ALGORITHM, SET_END_POINT, SET_START_POINT} from "./types";
+import {Point} from "../users/types";
 
-export function setStartPoint(startPoint: string): InputFormTypes {
+export function setStartPoint(startPoint: Point): InputFormTypes {
     return {
         type: SET_START_POINT,
         startPoint: startPoint
     };
 }
 
-export function setEndPoint(endPoint: string): InputFormTypes {
+export function setEndPoint(endPoint: Point): InputFormTypes {
     return {
         type: SET_END_POINT,
         endPoint: endPoint

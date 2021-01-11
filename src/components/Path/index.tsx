@@ -1,78 +1,61 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, MouseEvent} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
-import {setStartPoint, setEndPoint, setAlgorithm} from "../../store/inputForm/actions";
 import {AppState} from "../../store";
-
-import inputIcon from "../../assets/input.svg";
+import {setStartPoint, setEndPoint} from "../../store/inputForm/actions";
+import CustomSelect from "../CustomSelect";
 
 import './style.scss';
 
-const InputForm = () => {
-    const [pathfinderOptions, setPathfinderOptions] = useState<JSX.Element[]>([]);
-    const [pointOptions, setPointOptions] = useState<JSX.Element[]>([]);
+const Path = () => {
+    const [pointOptions, setPointOptions] = useState<{name: string, value: string}[]>([]);
 
-    const inputForm = useSelector((state: AppState) => state.inputForm);
+    const startPoint = useSelector((state: AppState) => state.inputForm.startPoint);
+    const endPoint = useSelector((state: AppState) => state.inputForm.endPoint);
     const points = useSelector((state: AppState) => state.userPanel.points);
-    const availablePathfinders = useSelector((state: AppState) => state.map.availablePathfinders);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (availablePathfinders.length > 0) {
-            setPathfinderOptions(availablePathfinders.map((pathfinder) =>
-                <option key={pathfinder} value={pathfinder}>
-                    {pathfinder}
-                </option>
-            ));
-            dispatch(setAlgorithm(availablePathfinders[0]));
-        }
-    }, [dispatch, availablePathfinders]);
-
-    useEffect(() => {
         if (points.length > 0) {
-            setPointOptions(points.map((point) =>
-                <option key={point.nodeId} value={point.nodeId}>
-                    {point.name}
-                </option>
-            ));
-            dispatch(setStartPoint(points[0].nodeId));
-            dispatch(setEndPoint(points[0].nodeId));
+            setPointOptions(points.map((point) => {
+                return {name: point.name, value: point.nodeId}
+            }));
         }
     }, [dispatch, points]);
 
+    const startPointSelectChangeHandler = (event: MouseEvent<HTMLDivElement>) => {
+        if(event.currentTarget.dataset.name && event.currentTarget.dataset.value) {
+            const startPoint = {name: event.currentTarget.dataset.name, nodeId: event.currentTarget.dataset.value};
+            dispatch(setStartPoint(startPoint));
+        }
+    }
+
+    const endPointSelectChangeHandler = (event: MouseEvent<HTMLDivElement>) => {
+        if(event.currentTarget.dataset.name && event.currentTarget.dataset.value) {
+            const endPoint = {name: event.currentTarget.dataset.name, nodeId: event.currentTarget.dataset.value};
+            dispatch(setEndPoint(endPoint));
+        }
+    }
+
     return (
-        <div className='path-panel'>
-            <div className='path-panel__button'>
-                <img src={inputIcon} alt='Input' width='36' height='36'/>
-            </div>
-            <div className='path-panel__form' role='form' aria-label="Input Form">
-                <select className='path-panel__select'
-                        value={inputForm.startPoint}
-                        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setStartPoint(event.target.value))}
-                >
-                    {pointOptions}
-                </select>
-                <select className='path-panel__select'
-                        value={inputForm.endPoint}
-                        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setEndPoint(event.target.value))}
-                >
-                    {pointOptions}
-                </select>
-            </div>
-                {/*<div className='input-form__item'>*/}
-                {/*    <label className='input-form__label'>*/}
-                {/*        Algorithm*/}
-                {/*        <select className='input-form__select'*/}
-                {/*                value={inputForm.algorithm}*/}
-                {/*                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAlgorithm(event.target.value))}*/}
-                {/*        >*/}
-                {/*            {pathfinderOptions}*/}
-                {/*        </select>*/}
-                {/*    </label>*/}
-                {/*</div>*/}
+        <div className='path'>
+            <CustomSelect
+                border={false}
+                selectedOption={{name: startPoint.name, value: startPoint.nodeId}}
+                options={pointOptions}
+                placeholder='Start'
+                onChange={startPointSelectChangeHandler}
+            />
+            <CustomSelect
+                border={false}
+                selectedOption={{name: endPoint.name, value: endPoint.nodeId}}
+                options={pointOptions}
+                placeholder='End'
+                onChange={endPointSelectChangeHandler}
+            />
         </div>
     );
 }
 
-export default InputForm;
+export default Path;

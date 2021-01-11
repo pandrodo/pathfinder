@@ -5,6 +5,7 @@ import {ALERT_CLEAR, ALERT_ERROR, ALERT_SUCCESS, ALERT_WARNING, AlertState, Aler
 const initialState: AlertState = {
     style: '',
     message: '',
+    source: ''
 };
 
 export function alertReducer(
@@ -15,22 +16,26 @@ export function alertReducer(
         case ALERT_SUCCESS:
             return update(state, {
                 style: { $set: 'success' },
-                message: { $set: action.message }
+                message: { $set: action.message },
+                source: { $set: action.source }
             });
         case ALERT_WARNING:
             return update(state, {
                 style: { $set: 'warning' },
-                message: { $set: action.message }
+                message: { $set: action.message },
+                source: { $set: action.source }
             });
         case ALERT_ERROR:
             return update(state, {
                 style: { $set: 'danger' },
-                message: { $set: action.message }
+                message: { $set: action.message },
+                source: { $set: action.source }
             });
         case ALERT_CLEAR:
             return update(state, {
                 style: { $set: '' },
-                message: { $set: '' }
+                message: { $set: '' },
+                source: { $set: '' }
             });
         default:
             return state;

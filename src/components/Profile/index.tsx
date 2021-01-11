@@ -1,74 +1,86 @@
-import React, {useState} from 'react';
+import React, {FormEvent, MouseEvent, MouseEventHandler, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
-import {alertError} from "../../store/alerts/actions";
-import {login, registration} from "../../store/users/actions";
 import {AppState} from "../../store";
+import {logout, setActivePanel} from "../../store/users/actions";
+import {alertClear} from "../../store/alerts/actions";
 
-import profileIcon from '../../assets/profile.svg';
+import Alert from "../Alert";
+import LoginForm from "../LoginForm";
+import SignupForm from "../SignupForm";
+
+import closeButton from '../../assets/close__button_purple.svg';
+import profileButton from '../../assets/profile__button.svg';
+import profileImage from '../../assets/profile__image.svg';
 
 import './style.scss';
 
 const Profile = () => {
-    const [toggled, setToggled] = useState(false);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [currentForm, setCurrentForm] = useState('login');
 
-    const loggingIn = useSelector((state: AppState) => state.userPanel.loggingIn);
-
+    const loggedIn = useSelector((state: AppState) => state.userPanel.loggedIn);
+    const user = useSelector((state: AppState) => state.userPanel.user);
+    const activePanel = useSelector((state: AppState) => state.userPanel.activePanel);
+    const alert = useSelector((state: AppState) => state.alert);
     const dispatch = useDispatch();
 
-    const clickHandler = (action: typeof login | typeof registration) => {
-        if (username !== '') {
-            if (password !== '') {
-                dispatch(action(username, password));
-            } else {
-                dispatch(alertError('Password is empty'));
-            }
-        } else {
-            dispatch(alertError('Username is empty'));
-        }
-    }
+    const togglePanel = () => {
+        activePanel === 'profile' ? dispatch(setActivePanel('none')) : dispatch(setActivePanel('profile'));
+    };
 
-    return (
+    const closeButtonOnClickHandler: MouseEventHandler = (event: MouseEvent) => {
+        if(alert.source === 'Profile') {
+            dispatch(alertClear());
+        }
+        togglePanel();
+    };
+
+    return(
         <div className='profile'>
-                <img className='profile__icon' src={profileIcon} alt='Input' width='36' height='36' onClick={() => setToggled(!toggled)}/>
-                { toggled &&
-                <div className='profile__form'>
-                    <input className='profile__input'
-                           type='text'
-                           name='username'
-                           autoComplete='on'
-                           value={username}
-                           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
-                    />
-                    <input className='profile__input'
-                           type='password'
-                           name='password'
-                           autoComplete='on'
-                           value={password}
-                           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
-                    />
-                    <button className='profile__button'
-                            type='submit'
-                            value='login'
-                            disabled={loggingIn}
-                            onClick={() => clickHandler(login)}
-                    >
-                        Login
-                    </button>
+            <img className='profile__button' src={profileButton} alt='Input' width='36' height='36' onClick={togglePanel}/>
+            {activePanel === 'profile' &&
+                <div className='profile__container'>
+                    <div className='profile__panel'>
+                        <img className='profile__close-button' src={closeButton} alt='Close' width='16' height='16' onClick={closeButtonOnClickHandler}/>
+                        <img className='profile__image' src={profileImage} alt='Profile' width='80' height='80'/>
+                        {loggedIn &&
+                        <div className='profile__title'>
+                            Profile
+                        </div>
+                        }
+                        {loggedIn &&
+                        <form className='profile__form'>
+                            <div className='profile__user'>{user.username}</div>
+                            <input
+                                className='profile__form-button'
+                                type='submit'
+                                value='Log out'
+                                onClick={(event: FormEvent) => {event.preventDefault(); dispatch(logout())}}
+                            />
+                        </form>
+                        }
+                        {!loggedIn &&
+                        <div className='profile__title'>
+                            <input
+                                className={`profile__slider-button ${currentForm === 'login' ? 'profile__slider-button_active' : null}`}
+                                type='button'
+                                value='Log in'
+                                onClick={() => setCurrentForm('login')}
+                            />
+                            <input
+                                className={`profile__slider-button ${currentForm === 'signup' ? 'profile__slider-button_active' : null}`}
+                                type='button'
+                                value='Sign up'
+                                onClick={() => setCurrentForm('signup')}
+                            />
+                        </div>
+                        }
+                        {!loggedIn && alert.source === 'Profile' && <Alert in_panel={true}/>}
+                        {!loggedIn && currentForm === 'login' && <LoginForm/>}
+                        {!loggedIn && currentForm === 'signup' && <SignupForm/>}
+                    </div>
                 </div>
-                }
-                {/*<div className='login-form__item'>*/}
-                {/*    <button className='login-form__button'*/}
-                {/*           type='submit'*/}
-                {/*           value='registration'*/}
-                {/*           disabled={loggingIn}*/}
-                {/*           onClick={() => clickHandler(registration)}*/}
-                {/*    >*/}
-                {/*        Registration*/}
-                {/*    </button>*/}
-                {/*</div>*/}
+            }
         </div>
     );
 }

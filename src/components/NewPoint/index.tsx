@@ -1,15 +1,16 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {logout} from "../../store/users/actions";
 import {alertClear, alertWarning} from "../../store/alerts/actions";
 import {addNewPointStart, addNewPointEnd, getPoints} from "../../store/users/actions";
 import {AppState} from "../../store";
 
-import './style.scss';
-import newPointIcon from "../../assets/new-point__button.svg";
+import newPointButtonAdd from "../../assets/new-point__button_add.svg";
+import newPointButtonCancel from "../../assets/new-point__button_cancel.svg";
 
-const NewPointForm = () => {
+import './style.scss';
+
+const NewPoint = () => {
     const userName = useSelector((state: AppState) => state.userPanel.user.username);
     const addingNewPoint = useSelector((state: AppState) => state.userPanel.addingNewPoint);
     const selectingPointOnMap = useSelector((state: AppState) => state.userPanel.selectingPointOnMap);
@@ -22,41 +23,28 @@ const NewPointForm = () => {
         }
     }, [dispatch, userName, addingNewPoint]);
 
-    const handleAddNewPointButton = () => {
+    const handleNewPointButton = () => {
         if (selectingPointOnMap) {
             dispatch(addNewPointEnd());
             dispatch(alertClear());
         } else {
             dispatch(addNewPointStart());
-            dispatch(alertWarning('Click on map to add new point'));
+            dispatch(alertWarning('Click on map to add new point', 'NewPoint'));
         }
     }
 
     return (
         <div className='new-point' >
-            <div className='new-point-__button'>
-                <img
-                    className='button-icon'
-                    src={newPointIcon}
-                    alt='New Point'
-                    width='36'
-                    height='36'
-                />
-            </div>
-
-            {/*<input className='new-point-form__button'*/}
-            {/*       type='button'*/}
-            {/*       value={ selectingPointOnMap ? "Stop" : "New Point" }*/}
-            {/*       disabled={addingNewPoint}*/}
-            {/*       onClick={handleAddNewPointButton}*/}
-            {/*/>*/}
-            {/*<input className='new-point-form__button'*/}
-            {/*       type='button'*/}
-            {/*       value='Logout'*/}
-            {/*       onClick={() => dispatch(logout())}*/}
-            {/*/>*/}
+            <img
+                className='new-point__button'
+                src={selectingPointOnMap ? newPointButtonCancel : newPointButtonAdd}
+                alt='New Point'
+                width='36'
+                height='36'
+                onClick={handleNewPointButton}
+            />
         </div>
     );
 }
 
-export default NewPointForm;
+export default NewPoint;

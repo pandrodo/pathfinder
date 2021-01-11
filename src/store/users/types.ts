@@ -9,13 +9,15 @@ export interface User {
 }
 
 export interface UserPanelState {
+    activePanel: string,
     addingNewPoint: boolean,
     selectingPointOnMap: boolean,
     loggingIn: boolean,
     loggedIn: boolean,
     registering: boolean,
     points: Point[],
-    user: User
+    user: User,
+    theme: string
 }
 
 export const USERS_LOGIN_REQUEST = 'USERS_LOGIN_REQUEST';
@@ -35,6 +37,10 @@ export const USERS_ADDNEWPOINT_END = 'USERS_ADDNEWPOINT_END';
 export const USERS_ADDNEWPOINT_REQUEST = 'USERS_ADDNEWPOINT_REQUEST';
 export const USERS_ADDNEWPOINT_SUCCESS = 'USERS_ADDNEWPOINT_SUCCESS';
 export const USERS_ADDNEWPOINT_FAILURE = 'USERS_ADDNEWPOINT_FAILURE';
+
+export const SET_ACTIVE_PANEL = 'SET_ACTIVE_PANEL';
+
+export const SET_THEME = 'SET_THEME';
 
 interface UsersLoginRequest {
     type: typeof USERS_LOGIN_REQUEST;
@@ -94,8 +100,20 @@ interface UsersGetpointsFailure {
     type: typeof USERS_GETPOINTS_FAILURE;
 }
 
+interface SetActivePanel {
+    type: typeof SET_ACTIVE_PANEL;
+    panel: string;
+}
+
+interface SetTheme {
+    type: typeof SET_THEME;
+    theme: string;
+}
+
 export type UsersTypes = UsersLoginRequest | UsersLoginSuccess | UsersLoginFailure | UsersLogout |
     UsersRegistrationRequest | UsersRegistrationSuccess | UsersRegistrationFailure |
     UsersGetpointsSuccess | UsersGetpointsFailure |
     UsersAddNewPointStart | UsersAddNewPointEnd |
-    UsersAddNewPointRequest | UsersAddNewPointSuccess | UsersAddNewPointFailure;
+    UsersAddNewPointRequest | UsersAddNewPointSuccess | UsersAddNewPointFailure |
+    SetActivePanel |
+    SetTheme;

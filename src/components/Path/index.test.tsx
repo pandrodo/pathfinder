@@ -8,7 +8,7 @@ import configureStore from "../../store";
 import {setAvailablePathfinders} from "../../store/map/actions";
 import {getPointsSuccess} from "../../store/users/actions";
 
-import InputForm from "./index";
+import Path from "./index";
 
 describe("The InputForm component", () => {
     it("shows start point select and it changes store state on change", () => {
@@ -16,7 +16,7 @@ describe("The InputForm component", () => {
 
         render(
             <Provider store={store}>
-                <InputForm/>
+                <Path/>
             </Provider>
         );
 
@@ -35,7 +35,7 @@ describe("The InputForm component", () => {
 
         render(
             <Provider store={store}>
-                <InputForm/>
+                <Path/>
             </Provider>
         );
 
@@ -55,7 +55,7 @@ describe("The InputForm component", () => {
 
         render(
             <Provider store={store}>
-                <InputForm/>
+                <Path/>
             </Provider>
         );
 
@@ -74,7 +74,7 @@ describe("The InputForm component", () => {
 
         render(
             <Provider store={store}>
-                <InputForm/>
+                <Path/>
             </Provider>
         );
 
@@ -94,7 +94,7 @@ describe("The InputForm component", () => {
 
         render(
             <Provider store={store}>
-                <InputForm/>
+                <Path/>
             </Provider>
         );
 

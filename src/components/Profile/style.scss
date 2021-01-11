@@ -1,10 +1,79 @@
-.profile {
-    position: relative;
+@import 'src/styles/colors';
+
+.profile__button {
+    display: block;
+    box-shadow: $box-shadow;
+    cursor: pointer;
+
+    &:hover, &:focus {
+        box-shadow: $active-box-shadow;
+    }
 }
 
-.profile__icon {
-    display: block;
+.profile__container {
+    position: absolute;
+    top: -.5rem;
+    right: -.5rem;
+    z-index: 2;
+
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+
+    background: white;
+}
+
+.profile__panel {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    height: 448px;
+    width: 320px;
+
+    background: white;
+    border-radius: 2px;
+    padding: 2rem;
+}
+
+.profile__close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     cursor: pointer;
+}
+
+.profile__image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile__title {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+
+    color: $main-color;
+}
+
+.profile__slider-button {
+    background: white;
+    border: none;
+    color: $main-color;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.profile__slider-button_active {
+    border-bottom: 2px solid $main-color;
 }
 
 .profile__form {
@@ -12,73 +81,32 @@
     flex-flow: column;
     justify-content: space-between;
 
-    position: absolute;
-    top: calc(36px + .5rem);
-    right: calc(36px + .5rem);
+    height: 50%;
 
-    height: calc(108px + 2rem);
+    > input[type=submit] {
+        height: 36px;
 
-    background: white;
-    border-radius: 4px;
-    padding: .5rem;
+        border: transparent;
+        background-color: $main-color;
+        color: $secondary-color;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+    }
 }
 
-.profile__input, .profile__button {
-    height: 36px;
-}
+@media screen and (min-width: 992px) {
+    .profile__container {
+        top: calc(36px + .5rem);
+        right: calc(36px + .5rem);
 
-//@import "src/styles/shared";
-//
-//.login-form {
-//    display: flex;
-//    flex-flow: column;
-//    margin: 0;
-//}
-//
-//.login-form__item {
-//    display: flex;
-//    flex-flow: column;
-//    margin: 0 0 0.5rem;
-//
-//    &:last-of-type {
-//        margin: 0;
-//    }
-//}
-//
-//.login-form__label {
-//    margin-bottom: 0;
-//    text-align: center;
-//}
-//
-//.login-form__input {
-//    @extend %input
-//}
-//
-//.login-form__button {
-//    @extend %button;
-//
-//    margin: .5rem 0 0 0;
-//}
-//
-//@media screen and (min-width: 992px) {
-//    .login-form {
-//        flex-flow: row;
-//        align-items: flex-end;
-//        margin: 0 0 0 0.5rem;
-//        width: 40%;
-//    }
-//
-//    .login-form__item {
-//        min-width: 0;
-//        width: calc(25% - .375rem);
-//        margin: 0 0 0 0.5rem;
-//
-//        &:first-of-type {
-//            margin: 0;
-//        }
-//
-//        &:last-of-type {
-//            margin: 0 0 0 0.5rem;
-//        }
-//    }
-//}
+        height: 448px;
+        width: 320px;
+    }
+
+    .profile__panel {
+        box-shadow: $box-shadow;
+    }
+}

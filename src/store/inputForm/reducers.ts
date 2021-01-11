@@ -9,8 +9,8 @@ import {
 } from "./types";
 
 const initialState: InputFormState = {
-    startPoint: '',
-    endPoint: '',
+    startPoint: {name: '', nodeId: ''},
+    endPoint: {name: '', nodeId: ''},
     algorithm: '',
 };
 

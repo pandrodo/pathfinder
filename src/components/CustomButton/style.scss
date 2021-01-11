@@ -1,0 +1,35 @@
+@import "src/styles/colors";
+
+.custom-button {
+    position: relative;
+
+    height: 36px;
+
+    border-radius: 2px;
+    border: transparent;
+    background: $main-color;
+    color: $secondary-color;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.custom-button__ripple {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    display: block;
+    content: "";
+    border-radius: 9999px;
+    opacity: 1;
+    animation: ripple-effect 400ms linear;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}

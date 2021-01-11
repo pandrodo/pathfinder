@@ -1,0 +1,41 @@
+.control-panel {
+    position: absolute;
+
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    width: calc(100% - 1rem);
+    height: auto;
+    margin: .5rem .5rem 0;
+
+    > div {
+        z-index: 1;
+    }
+
+    > .toolbar {
+        display: flex;
+        flex-flow: column;
+
+        > .alert_danger, .alert_success, .alert_warning {
+            margin: .5rem 0 0 0;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .control-panel {
+
+        > .toolbar {
+            flex-flow: row;
+            justify-content: space-between;
+
+            width: calc(100% - 36px - .5rem);
+
+            > .alert_danger, .alert_success, .alert_warning {
+                margin: 0;
+            }
+        }
+    }
+}

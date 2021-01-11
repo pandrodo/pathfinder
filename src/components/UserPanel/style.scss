@@ -1,0 +1,11 @@
+.user-panel {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    height: calc(72px + .5rem);
+}
+
+.user-panel_logged-in {
+    height: calc(108px + 1rem);
+}

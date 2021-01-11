@@ -1,85 +1,23 @@
 @import "src/styles/shared";
 
-.path-panel {
-    > div {
-        &:first-of-type {
-            display: block;
-        }
+.path {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 
-        &:not(first-of-type) {
-            display: none;
-        }
+    width: 200px;
+    height: calc(72px + 0.5rem);
+
+    > div {
+        width: 200px;
     }
 }
 
 @media screen and (min-width: 992px) {
-    .path-panel {
-        > div {
-            &:first-of-type {
-                display: none;
-            }
-
-            &:not(first-of-type) {
-                display: flex;
-            }
-        }
-    }
-
-    .path-panel__form {
-        display: flex;
+    .path {
         flex-flow: row;
-        justify-content: space-between;
-        width: calc(100% + .5rem);
 
-        > select {
-            height: 36px;
-        }
+        width: calc(400px + 0.5rem);
+        height: 36px;
     }
 }
-
-//.input-form {
-//    display: flex;
-//    flex-flow: column;
-//}
-//
-//.input-form__item {
-//    display: flex;
-//    flex-flow: column;
-//    margin: 0 0 0.5rem;
-//
-//
-//}
-//
-//.input-form__label {
-//    margin-bottom: 0;
-//    text-align: center;
-//}
-//
-//.input-form__select {
-//    @extend %input;
-//}
-//
-//@media screen and (min-width: 992px) {
-//    .input-form {
-//        flex-flow: row;
-//        margin-right: auto;
-//        //width: 40%;
-//    }
-//
-//    .input-form__item {
-//        //width: calc((100% - 1rem)/3);
-//        margin: 0 0.5rem 0 0;
-//
-//        &:first-of-type {
-//            display: none;
-//        }
-//
-//        &:not(first-of-type) {
-//            display: flex;
-//        }
-//
-//        &:last-of-type {
-//            margin: 0;
-//        }
-//    }
-//}

@@ -1,6 +1,7 @@
 export interface AlertState {
-    style: string;
     message: string;
+    style: string;
+    source: string;
 }
 
 export const ALERT_SUCCESS = 'ALERT_SUCCESS';
@@ -11,16 +12,19 @@ export const ALERT_CLEAR = 'ALERT_CLEAR';
 interface AlertSuccess {
     type: typeof ALERT_SUCCESS;
     message: string;
+    source: string;
 }
 
 interface AlertWarning {
     type: typeof  ALERT_WARNING;
     message: string;
+    source: string;
 }
 
 interface AlertError {
     type: typeof ALERT_ERROR;
     message: string;
+    source: string;
 }
 
 interface AlertClear {

@@ -1,29 +1,5 @@
 .application {
-    display: flex;
-    flex-flow: column;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-    > div {
-        &:last-of-type {
-            flex-grow: 1;
-        }
-    }
-}
-
-.control-panel {
-    display: flex;
-    flex-flow: column;
-    margin: .5rem .5rem 1rem;
-}
-
-@media screen and (min-width: 992px) {
-    .control-panel {
-        flex-flow: row;
-        justify-content: space-between;
-
-        > div {
-          align-self: flex-end;
-        }
-    }
 }

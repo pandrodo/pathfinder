@@ -36,6 +36,7 @@ const LeafletMap = () => {
     const userName = useSelector((state: AppState) => state.userPanel.user.username);
     const points = useSelector((state: AppState) => state.userPanel.points);
     const selectingPointOnMap = useSelector((state: AppState) => state.userPanel.selectingPointOnMap);
+    const theme = useSelector((state: AppState) => state.userPanel.theme);
 
     const dispatch = useDispatch();
 
@@ -56,14 +57,21 @@ const LeafletMap = () => {
     }
 
     useEffect(() => {
+        // Choose tiles type
+        const tileLayer = L.tileLayer(`https://tile.jawg.io/jawg-${theme}/{z}/{x}/{y}.png?access-token=5AyVJTHfp31P1al60LYSWsOv6dnMk8JijE7mueA2KCTgmSdTXFg5dp8IBZQEl2Td`, {
+            attribution: '<a href="https://www.jawg.io" target="_blank">&copy; Jawg</a> - <a href="https://www.openstreetmap.org" target="_blank">&copy; OpenStreetMap</a>&nbsp;contributors'
+        });
+
         // Prepare leaflet map and grouped layers for markers and path
         const lMap = L.map('map', {
             center: [58.6026, 49.66664],
             zoom: 16,
+            zoomControl: false,
             layers: [
-                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }),
+                tileLayer,
+                // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                // }),
             ],
         });
 
@@ -111,7 +119,7 @@ const LeafletMap = () => {
             lMap?.remove();
             graph?.clear();
         };
-    }, [dispatch]);
+    }, [theme, dispatch]);
 
     const cleanPathGroupLayer = useCallback(() => {
         if (leafletRouteGroupLayer) {
@@ -148,16 +156,16 @@ const LeafletMap = () => {
         cleanPathGroupLayer();
 
         // Get new route and fill route group layer
-        if (inputForm.startPoint !== inputForm.endPoint) {
-            const routeID = inputForm.algorithm + '-' + inputForm.startPoint + '-' + inputForm.endPoint;
-            const reverseRouteID = inputForm.algorithm + '-' + inputForm.endPoint + '-' + inputForm.startPoint;
+        if (inputForm.startPoint.nodeId !== '' && inputForm.endPoint.nodeId !== '' && inputForm.startPoint.nodeId !== inputForm.endPoint.nodeId) {
+            const routeID = inputForm.algorithm + '-' + inputForm.startPoint.nodeId + '-' + inputForm.endPoint.nodeId;
+            const reverseRouteID = inputForm.algorithm + '-' + inputForm.endPoint.nodeId + '-' + inputForm.startPoint.nodeId;
             const storedRoute = localStorage.getItem(routeID) || localStorage.getItem(reverseRouteID);
             let route: Array<L.LatLng> = [];
 
             if (storedRoute) {
                 route = JSON.parse(storedRoute);
             } else {
-                const path = pathfinders[inputForm.algorithm]?.find(parseInt(inputForm.startPoint), parseInt(inputForm.endPoint));
+                const path = pathfinders[inputForm.algorithm]?.find(parseInt(inputForm.startPoint.nodeId), parseInt(inputForm.endPoint.nodeId));
                 if (path) {
                     route = path.map(element => {
                         return new L.LatLng(element.data.lat, element.data.lon);

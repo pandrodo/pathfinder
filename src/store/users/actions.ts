@@ -2,21 +2,23 @@ import {Dispatch} from "redux";
 
 import {
     Point,
+    SET_ACTIVE_PANEL,
+    SET_THEME,
     User,
+    USERS_ADDNEWPOINT_END,
+    USERS_ADDNEWPOINT_FAILURE,
+    USERS_ADDNEWPOINT_REQUEST,
+    USERS_ADDNEWPOINT_START,
+    USERS_ADDNEWPOINT_SUCCESS,
+    USERS_GETPOINTS_FAILURE,
+    USERS_GETPOINTS_SUCCESS,
+    USERS_LOGIN_FAILURE,
     USERS_LOGIN_REQUEST,
     USERS_LOGIN_SUCCESS,
-    USERS_LOGIN_FAILURE,
     USERS_LOGOUT,
+    USERS_REGISTRATION_FAILURE,
     USERS_REGISTRATION_REQUEST,
     USERS_REGISTRATION_SUCCESS,
-    USERS_REGISTRATION_FAILURE,
-    USERS_ADDNEWPOINT_START,
-    USERS_ADDNEWPOINT_END,
-    USERS_ADDNEWPOINT_REQUEST,
-    USERS_ADDNEWPOINT_SUCCESS,
-    USERS_ADDNEWPOINT_FAILURE,
-    USERS_GETPOINTS_SUCCESS,
-    USERS_GETPOINTS_FAILURE,
     UsersTypes
 } from "./types";
 import {addNewUserPoint, getUserPoints, loginUser, logoutUser, registrationUser} from "../../services/users";
@@ -49,11 +51,11 @@ export const login = (username: string, password: string) => async (dispatch: Di
         .then(
             response => {
                 dispatch(loginSuccess(response.user));
-                dispatch(alertSuccess(response.message));
+                dispatch(alertSuccess(response.message, 'Profile'));
                 },
             error => {
                 dispatch(loginFailure());
-                dispatch(alertError(error));
+                dispatch(alertError(error, 'Profile'));
                 }
         );
 };
@@ -95,11 +97,11 @@ export const registration = (username: string, password: string) => async (dispa
         .then(
             response => {
                 dispatch(registrationSuccess());
-                dispatch(alertSuccess(response.message));
+                dispatch(alertSuccess(response.message, 'Profile'));
             },
             error => {
                 dispatch(registrationFailure());
-                dispatch(alertError(error));
+                dispatch(alertError(error, 'Profile'));
             }
         );
 }
@@ -141,11 +143,11 @@ export const addNewPoint = (username: string, nodeId: string, name: string) => a
         .then(
             response => {
                 dispatch(addNewPointSuccess());
-                dispatch(alertSuccess(response.message));
+                dispatch(alertSuccess(response.message, 'Store'));
             },
             error => {
                 dispatch(addNewPointFailure());
-                dispatch(alertError(error));
+                dispatch(alertError(error, 'Store'));
             }
         );
 }
@@ -169,7 +171,21 @@ export const getPoints = (username: string) => async (dispatch: DispatchFunction
             points => dispatch(getPointsSuccess(points)),
             error => {
                 dispatch(getPointsFailure());
-                dispatch(alertError(error));
+                dispatch(alertError(error, 'Store'));
             }
         );
+}
+
+export function setActivePanel(panel: string): UsersTypes {
+    return {
+        type: SET_ACTIVE_PANEL,
+        panel: panel
+    }
+}
+
+export function setTheme(theme: string): UsersTypes {
+    return {
+        type: SET_THEME,
+        theme: theme
+    }
 }

@@ -1,6 +1,8 @@
+import {Point} from "../users/types";
+
 export interface InputFormState {
-    startPoint: string;
-    endPoint: string;
+    startPoint: Point;
+    endPoint: Point;
     algorithm: string;
 }
 
@@ -10,12 +12,12 @@ export const SET_ALGORITHM = 'SET_ALGORITHM';
 
 interface SetStartPointAction {
     type: typeof SET_START_POINT;
-    startPoint: string;
+    startPoint: Point;
 }
 
 interface SetEndPointAction {
     type: typeof SET_END_POINT;
-    endPoint: string;
+    endPoint: Point;
 }
 
 interface SetAlgorithmAction {

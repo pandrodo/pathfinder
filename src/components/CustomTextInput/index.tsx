@@ -1,20 +1,32 @@
-import React, {EventHandler, FormEvent, useState} from 'react';
+import React, {ChangeEventHandler} from 'react';
 
 import './style.scss';
 
-interface InputProps {
+interface CustomTextInputProps {
+    type: string;
+    name: string;
     placeholder: string;
     value: string;
-    onChange: EventHandler<FormEvent>;
+    onChange: ChangeEventHandler;
 }
 
-const Input = (props: InputProps) => {
+const CustomTextInput = (props: CustomTextInputProps) => {
     return(
-        <div className='input-wrapper'>
-            <input className='input' type='text' value={props.value} onChange={props.onChange}/>
-            <div className={`placeholder ${props.value.length > 0 ? 'placeholder_not-empty': null}`}>{props.placeholder}</div>
+        <div className='custom-text-input'>
+            <input
+                className='custom-text-input__input'
+                type={props.type}
+                value={props.value}
+                name={props.name}
+                onChange={props.onChange}
+                autoComplete='on'
+            />
+            <div
+                className={`custom-text-input__placeholder ${props.value.length > 0 ? 'custom-text-input__placeholder_not-empty': null}`}>
+                {props.placeholder}
+            </div>
         </div>
     );
 }
 
-export default Input;
+export default CustomTextInput;
