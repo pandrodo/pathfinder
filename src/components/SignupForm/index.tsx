@@ -1,9 +1,12 @@
 import React, {FormEvent, useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
+import {AppState} from "../../store";
 import {registration} from "../../store/users/actions";
 import {alertError} from "../../store/alerts/actions";
+
 import CustomTextInput from "../CustomTextInput";
+import CustomButton from "../CustomButton";
 
 import './style.scss';
 
@@ -12,6 +15,7 @@ const SignupForm = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const theme = useSelector((state: AppState) => state.userPanel.theme);
     const dispatch = useDispatch();
 
     const signupHandler = (event: FormEvent) => {
@@ -39,6 +43,7 @@ const SignupForm = () => {
     return (
         <form className='profile__form' onSubmit={signupHandler}>
             <CustomTextInput
+                dark={theme === 'dark'}
                 type='text'
                 name='username'
                 placeholder='Username'
@@ -46,6 +51,7 @@ const SignupForm = () => {
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
             />
             <CustomTextInput
+                dark={theme === 'dark'}
                 type='password'
                 name='password'
                 placeholder='Password'
@@ -53,17 +59,14 @@ const SignupForm = () => {
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
             />
             <CustomTextInput
+                dark={theme === 'dark'}
                 type='password'
                 name='confirmPassword'
                 placeholder='Confirm password'
                 value={confirmPassword}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(event.target.value)}
             />
-            <input
-                className='profile__form-button'
-                type='submit'
-                value='Sign Up'
-            />
+            <CustomButton value='Sign Up' onClick={signupHandler}/>
         </form>
     );
 }

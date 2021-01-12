@@ -62,6 +62,10 @@ input {
     }
 }
 
+.custom-text-input__input_dark {
+    color: $secondary-color-dark;
+}
+
 .custom-text-input__placeholder {
     position: absolute;
     bottom: 20%;

@@ -1,8 +1,10 @@
 import React, {ChangeEventHandler} from 'react';
+import classNames from 'classnames';
 
 import './style.scss';
 
 interface CustomTextInputProps {
+    dark?: boolean;
     type: string;
     name: string;
     placeholder: string;
@@ -14,7 +16,7 @@ const CustomTextInput = (props: CustomTextInputProps) => {
     return(
         <div className='custom-text-input'>
             <input
-                className='custom-text-input__input'
+                className={classNames('custom-text-input__input', {'custom-text-input__input_dark': props.dark})}
                 type={props.type}
                 value={props.value}
                 name={props.name}
@@ -22,7 +24,7 @@ const CustomTextInput = (props: CustomTextInputProps) => {
                 autoComplete='on'
             />
             <div
-                className={`custom-text-input__placeholder ${props.value.length > 0 ? 'custom-text-input__placeholder_not-empty': null}`}>
+                className={classNames('custom-text-input__placeholder', {'custom-text-input__placeholder_not-empty': props.value.length > 0})}>
                 {props.placeholder}
             </div>
         </div>

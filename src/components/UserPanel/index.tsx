@@ -1,12 +1,15 @@
 import React, {useEffect} from "react";
-import NewPoint from "../NewPoint";
-import Profile from "../Profile";
+import classNames from 'classnames';
 import {useDispatch, useSelector} from "react-redux";
+
 import {AppState} from "../../store";
 import {loginSuccess} from "../../store/users/actions";
 
-import './style.scss';
+import NewPoint from "../NewPoint";
 import Settings from "../Settings";
+import Profile from "../Profile";
+
+import './style.scss';
 
 const UserPanel = () => {
     const loggedIn = useSelector((state: AppState) => state.userPanel.loggedIn);
@@ -22,7 +25,7 @@ const UserPanel = () => {
     }, [dispatch]);
 
     return(
-        <div className={`user-panel ${loggedIn && 'user-panel_logged-in'}`}>
+        <div className={classNames('user-panel', {'user-panel_logged-in': loggedIn})}>
             <Profile />
             <Settings />
             {loggedIn ? <NewPoint /> : null}

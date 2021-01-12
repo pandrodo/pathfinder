@@ -13,7 +13,7 @@ const Path = () => {
     const startPoint = useSelector((state: AppState) => state.inputForm.startPoint);
     const endPoint = useSelector((state: AppState) => state.inputForm.endPoint);
     const points = useSelector((state: AppState) => state.userPanel.points);
-
+    const theme = useSelector((state: AppState) => state.userPanel.theme);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -42,6 +42,7 @@ const Path = () => {
         <div className='path'>
             <CustomSelect
                 border={false}
+                dark={theme === 'dark'}
                 selectedOption={{name: startPoint.name, value: startPoint.nodeId}}
                 options={pointOptions}
                 placeholder='Start'
@@ -49,6 +50,7 @@ const Path = () => {
             />
             <CustomSelect
                 border={false}
+                dark={theme === 'dark'}
                 selectedOption={{name: endPoint.name, value: endPoint.nodeId}}
                 options={pointOptions}
                 placeholder='End'

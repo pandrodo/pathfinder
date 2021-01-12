@@ -7,7 +7,7 @@
 
     box-shadow: $box-shadow;
     border-radius: 2px;
-    background: white;
+    background: $background-color;
     cursor: pointer;
     user-select: none;
 
@@ -58,6 +58,11 @@
     }
 }
 
+.custom-select_dark {
+    color: $secondary-color-dark;
+    background-color: $background-color-dark;
+}
+
 .custom-select_with-border {
     border-bottom: 1px solid $input-color;
     box-shadow: none;
@@ -94,11 +99,22 @@
     background: white;
 }
 
+.custom-select__dropdown_dark {
+    color: $secondary-color-dark;
+    background-color: $background-color-dark;
+}
+
 .custom-select__option {
     padding: 0.25rem 1.5rem 0.25rem 0.5rem;
 
     &:hover {
-        background: #E0E0E0;
+        background: $hover-color;
+    }
+}
+
+.custom-select__option_dark {
+    &:hover {
+        background: $hover-color-dark;
     }
 }
 

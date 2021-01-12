@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import {useDispatch, useSelector} from "react-redux";
 
 import {AppState} from "../../store";
@@ -19,7 +20,7 @@ const Alert = (props: AlertProps) => {
     const dispatch = useDispatch();
 
     return (
-        <div role='alert' aria-label='Error' className={`alert alert_${alert.style}${props.in_panel ? ' alert_in-panel' : ''}`}>
+        <div role='alert' aria-label='Error' className={classNames('alert', `alert_${alert.style}`, {'alert_in-panel': props.in_panel})}>
             <img
                 className='alert__close-button'
                 src={alert.style === 'warning' ? closeButtonBlack : closeButtonWhite}

@@ -24,7 +24,11 @@
     height: 100vh;
     width: 100vw;
 
-    background: white;
+    background: $background-color;
+}
+
+.settings__container_dark {
+    background-color: $background-color-dark;
 }
 
 .settings__panel {
@@ -35,9 +39,13 @@
     height: 448px;
     width: 320px;
 
-    background: white;
+    background: $background-color;
     border-radius: 2px;
     padding: 2rem;
+}
+
+.settings__panel_dark {
+    background-color: $background-color-dark;
 }
 
 .settings__close-button {
@@ -61,6 +69,7 @@
     height: 5%;
 
     color: $main-color;
+    font-weight: bold;
 }
 
 .settings__form {

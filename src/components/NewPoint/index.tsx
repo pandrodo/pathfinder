@@ -6,7 +6,9 @@ import {addNewPointStart, addNewPointEnd, getPoints} from "../../store/users/act
 import {AppState} from "../../store";
 
 import newPointButtonAdd from "../../assets/new-point__button_add.svg";
+import newPointButtonAddDark from '../../assets/new-point__button_add_dark.svg';
 import newPointButtonCancel from "../../assets/new-point__button_cancel.svg";
+import newPointButtonCancelDark from '../../assets/new-point__button_cancel_dark.svg';
 
 import './style.scss';
 
@@ -14,7 +16,7 @@ const NewPoint = () => {
     const userName = useSelector((state: AppState) => state.userPanel.user.username);
     const addingNewPoint = useSelector((state: AppState) => state.userPanel.addingNewPoint);
     const selectingPointOnMap = useSelector((state: AppState) => state.userPanel.selectingPointOnMap);
-
+    const theme = useSelector((state: AppState) => state.userPanel.theme);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -37,7 +39,9 @@ const NewPoint = () => {
         <div className='new-point' >
             <img
                 className='new-point__button'
-                src={selectingPointOnMap ? newPointButtonCancel : newPointButtonAdd}
+                src={selectingPointOnMap
+                    ? theme === 'light' ? newPointButtonCancel : newPointButtonCancelDark
+                    : theme === 'light' ? newPointButtonAdd : newPointButtonAddDark}
                 alt='New Point'
                 width='36'
                 height='36'

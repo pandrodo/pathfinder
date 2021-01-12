@@ -24,7 +24,11 @@
     height: 100vh;
     width: 100vw;
 
-    background: white;
+    background: $background-color;
+}
+
+.profile__container_dark {
+    background-color: $background-color-dark;
 }
 
 .profile__panel {
@@ -35,9 +39,13 @@
     height: 448px;
     width: 320px;
 
-    background: white;
+    background: $background-color;
     border-radius: 2px;
     padding: 2rem;
+}
+
+.profile__panel_dark {
+    background-color: $background-color-dark;
 }
 
 .profile__close-button {
@@ -62,14 +70,19 @@
 }
 
 .profile__slider-button {
-    background: white;
+    background: $background-color;
     border: none;
     color: $main-color;
     cursor: pointer;
+    font-weight: bold;
 
     &:focus {
         outline: none;
     }
+}
+
+.profile__slider-button_dark {
+    background: $background-color-dark;
 }
 
 .profile__slider-button_active {

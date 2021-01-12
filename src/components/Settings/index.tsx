@@ -1,15 +1,19 @@
 import React, {MouseEvent, useEffect, useState} from 'react';
-
+import classNames from 'classnames';
 import {useDispatch, useSelector} from "react-redux";
+
 import {AppState} from "../../store";
 import {setAlgorithm} from "../../store/inputForm/actions";
 import {setActivePanel} from "../../store/users/actions";
 import {setTheme} from "../../store/users/actions";
 
 import CustomSelect from "../CustomSelect";
+
 import closeButton from "../../assets/close__button_purple.svg";
 import settingsButton from '../../assets/settings__button.svg';
+import settingsButtonDark from '../../assets/settings__button_dark.svg';
 import settingsImage from '../../assets/settings__image.svg';
+import settingsImageDark from '../../assets/settings__image_dark.svg';
 
 import './style.scss';
 
@@ -59,24 +63,26 @@ const Settings = () => {
 
     return(
         <div className='settings'>
-            <img className='settings__button' src={settingsButton} alt='Settings' width='36' height='36' onClick={togglePanel}/>
+            <img className='settings__button' src={theme === 'light' ? settingsButton : settingsButtonDark} alt='Settings' width='36' height='36' onClick={togglePanel}/>
             {activePanel === 'settings' &&
-                <div className='settings__container'>
-                    <div className='settings__panel'>
+                <div className={classNames('settings__container', {'settings__container_dark': theme === 'dark'})}>
+                    <div className={classNames('settings__panel', {'settings__panel_dark': theme === 'dark'})}>
                         <img className='settings__close-button' src={closeButton} alt='Close' width='16' height='16' onClick={togglePanel}/>
-                        <img className='settings__image' src={settingsImage} alt='Settings' width='80' height='80'/>
+                        <img className='settings__image' src={theme === 'light' ? settingsImage : settingsImageDark} alt='Settings' width='80' height='80'/>
                         <div className='settings__title'>
                             Settings
                         </div>
                         <div className='settings__form'>
                             <CustomSelect
                                 border={true}
+                                dark={theme === 'dark'}
                                 selectedOption={{name: pathfinder, value: pathfinder}}
                                 options={pathfinderOptions}
                                 onChange={pathfinderSelectChangeHandler}
                             />
                             <CustomSelect
                                 border={true}
+                                dark={theme === 'dark'}
                                 selectedOption={{name: theme.charAt(0).toUpperCase() + theme.slice(1) + ' Theme', value: theme}}
                                 options={[{name: 'Light Theme', value: 'light'}, {name: 'Dark Theme', value: 'dark'}]}
                                 onChange={themeSelectChangeHandler}

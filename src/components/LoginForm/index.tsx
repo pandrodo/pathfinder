@@ -4,16 +4,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../store";
 import {login} from "../../store/users/actions";
 import {alertError} from "../../store/alerts/actions";
+
 import CustomTextInput from "../CustomTextInput";
+import CustomButton from "../CustomButton";
 
 import './style.scss';
-import CustomButton from "../CustomButton";
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const loggingIn = useSelector((state: AppState) => state.userPanel.loggingIn);
+    const theme = useSelector((state: AppState) => state.userPanel.theme);
     const dispatch = useDispatch();
 
     const loginHandler = (event: FormEvent) => {
@@ -33,6 +35,7 @@ const LoginForm = () => {
     return (
         <form className='profile__form' onSubmit={loginHandler}>
             <CustomTextInput
+                dark={theme === 'dark'}
                 type='text'
                 name='username'
                 placeholder='Username'
@@ -40,6 +43,7 @@ const LoginForm = () => {
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
             />
             <CustomTextInput
+                dark={theme === 'dark'}
                 type='password'
                 name='password'
                 placeholder='Password'
